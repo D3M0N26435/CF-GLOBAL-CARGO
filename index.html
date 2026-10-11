@@ -4,376 +4,127 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CF GLOBAL CARGO — Import & Logistics</title>
-    <!-- FontAwesome para Iconos -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/main.css">
 </head>
 <body>
 
-    <!-- ==================== 1. MENÚ PRINCIPAL STICKY ==================== -->
-    <header class="header-sticky" id="mainHeader">
+    <!-- ==================== HEADER STICKY ==================== -->
+    <header class="header-sticky">
         <div class="container header-container">
-            <!-- LOGO -->
-            <a href="#inicio" class="logo">
-                <span class="logo-brand">CF GLOBAL</span>
-                <span class="logo-sub">CARGO IMPORT & LOGISTICS</span>
+            <!-- LOGO ESPACIO -->
+            <a href="#inicio" class="logo-container">
+                <img src="assets/logo-cf.png" alt="CF Global Cargo Logo" class="logo-img" onerror="this.style.display='none'">
+                <div class="logo-text">
+                    <span class="logo-brand">CF GLOBAL</span>
+                    <span class="logo-sub">CARGO IMPORT & LOGISTICS</span>
+                </div>
             </a>
 
-            <!-- MENÚ DESK -->
-            <nav class="nav-menu" id="navMenu">
+            <!-- MENÚ CENTRAL -->
+            <nav class="nav-menu">
                 <a href="#inicio" class="nav-link active">INICIO</a>
                 <a href="#servicios" class="nav-link">SERVICIOS</a>
-                <a href="#rutas" class="nav-link">RUTAS</a>
                 <a href="#catalogo" class="nav-link">CATÁLOGO</a>
+                <a href="#cotizador" class="nav-link">COTIZAR</a>
                 <a href="#nosotros" class="nav-link">NOSOTROS</a>
                 <a href="#comunidades" class="nav-link">COMUNIDADES</a>
             </nav>
 
-            <!-- CTA DESTACADO -->
-            <div class="header-cta">
+            <!-- ACCIONES DERECHA -->
+            <div class="header-actions">
                 <a href="#cotizador" class="btn-cotizar-header">
-                    <span class="square-icon">🟧</span> COTIZAR AHORA
-                </a>
-            </div>
-
-            <!-- BOTÓN HAMBURGUESA MÓVIL -->
-            <button class="mobile-toggle" id="mobileToggle" aria-label="Abrir Menú">
-                <i class="fa-solid fa-bars"></i>
-            </button>
-        </div>
-
-        <!-- MENÚ DESPLEGABLE MÓVIL -->
-        <div class="mobile-drawer" id="mobileDrawer">
-            <a href="#inicio" class="mobile-link">INICIO</a>
-            <a href="#servicios" class="mobile-link">SERVICIOS</a>
-            <a href="#rutas" class="mobile-link">RUTAS</a>
-            <a href="#catalogo" class="mobile-link">CATÁLOGO</a>
-            <a href="#nosotros" class="mobile-link">NOSOTROS</a>
-            <a href="#comunidades" class="mobile-link">COMUNIDADES</a>
-            <div class="mobile-cta-box">
-                <a href="#cotizador" class="btn-cotizar-header mobile-btn-full">
                     <span>🟧</span> COTIZAR AHORA
+                </a>
+                <!-- BOTÓN LOGIN ADMIN A LA DERECHA -->
+                <a href="admin.html" class="btn-admin-login">
+                    <i class="fa-solid fa-lock"></i> Admin
                 </a>
             </div>
         </div>
     </header>
 
-    <!-- ==================== 2. PÁGINA DE INICIO (HERO) ==================== -->
-    <section id="inicio" class="hero-section">
-        <div class="hero-overlay"></div>
-        <div class="container hero-container">
-            <div class="hero-badge">LOGÍSTICA INTERNACIONAL & IMPORTACIONES</div>
-            <h1 class="hero-title">DEL MUNDO A BOLIVIA</h1>
-            <h2 class="hero-subtitle">GESTIONA TU CARGA. IMPORTA CON CONFIANZA.</h2>
-            <p class="hero-description">
-                “Somos tu aliado estratégico en importación y logística internacional. Conectamos tu carga con nuevas oportunidades para tu negocio.”
-            </p>
-
-            <div class="hero-pills">
-                <span>Importación</span> •
-                <span>Consolidación</span> •
-                <span>LCL</span> •
-                <span>FCL</span> •
-                <span>Transporte Marítimo</span> •
-                <span>Aéreo</span> •
-                <span>Terrestre</span>
-            </div>
-
-            <div class="hero-buttons">
-                <a href="#cotizador" class="btn-primary">
-                    <span>🟧</span> COTIZAR AHORA
-                </a>
-                <a href="#servicios" class="btn-secondary">
-                    VER NUESTROS SERVICIOS <i class="fa-solid fa-arrow-right"></i>
-                </a>
-            </div>
-
-            <div class="hero-quote">
-                <i class="fa-solid fa-quote-left"></i>
-                <span>Cada carga es un paso más hacia tu crecimiento.</span>
+    <!-- ==================== INICIO (HERO) ==================== -->
+    <section id="inicio" class="section-padding bg-dark text-white text-center" style="padding: 120px 0;">
+        <div class="container" style="max-width: 900px;">
+            <span class="subheading text-orange">LOGÍSTICA INTERNACIONAL & IMPORTACIONES</span>
+            <h1 style="font-size: 3.2rem; margin: 15px 0;">DEL MUNDO A BOLIVIA</h1>
+            <h2 style="font-size: 1.4rem; color: #CBD5E1; margin-bottom: 20px;">GESTIONA TU CARGA. IMPORTA CON CONFIANZA.</h2>
+            <p style="color: #94A3B8; margin-bottom: 30px;">“Somos tu aliado estratégico en importación y logística internacional. Conectamos tu carga con nuevas oportunidades para tu negocio.”</p>
+            <div style="display: flex; justify-content: center; gap: 15px;">
+                <a href="#cotizador" class="btn-cotizar-header" style="padding: 14px 28px; font-size: 1rem;">COTIZAR AHORA</a>
+                <a href="#catalogo" class="btn-admin-login" style="padding: 14px 28px; font-size: 1rem;">VER CATÁLOGO</a>
             </div>
         </div>
     </section>
 
-    <!-- ==================== 3. SERVICIOS ==================== -->
-    <section id="servicios" class="section-padding bg-light">
+    <!-- ==================== CATÁLOGO DE PRODUCTOS ==================== -->
+    <section id="catalogo" class="section-padding bg-light">
         <div class="container">
             <div class="section-header text-center">
-                <span class="subheading">NUESTROS SERVICIOS</span>
-                <h2 class="section-title">SOLUCIONES INTEGRALES DE IMPORTACIÓN Y LOGÍSTICA</h2>
+                <span class="subheading">ACTIVIDAD IMPORTADORA</span>
+                <h2 class="section-title">CATÁLOGO DE PRODUCTOS DE IMPORTACIÓN</h2>
                 <div class="title-bar"></div>
             </div>
 
-            <div class="grid-services">
-                <!-- Card 1 -->
-                <div class="service-card">
-                    <div class="card-icon">📦</div>
-                    <h3>CONSOLIDACIÓN DE CARGA — LCL / CBM</h3>
-                    <p>Consolidación de mercancías provenientes de diferentes puntos de origen para su transporte hacia Bolivia.</p>
-                    <a href="#cotizador" class="card-link" onclick="selectService('lcl')">Cotizar LCL <i class="fa-solid fa-chevron-right"></i></a>
-                </div>
+            <!-- Pestañas de Categoría -->
+            <div class="catalog-tabs">
+                <button class="catalog-tab-btn active" onclick="filterCatalog('china')">🇨🇳 PRODUCTOS DESDE CHINA</button>
+                <button class="catalog-tab-btn" onclick="filterCatalog('zofri')">🇨🇱 PRODUCTOS ZOFRI – IQUIQUE</button>
+            </div>
 
-                <!-- Card 2 -->
-                <div class="service-card">
-                    <div class="card-icon">🚢</div>
-                    <h3>CONTENEDORES COMPLETOS — FCL</h3>
-                    <p>Gestión de contenedores completos de diferentes tipos y tamaños (20GP, 40GP, 40HQ).</p>
-                    <a href="#cotizador" class="card-link" onclick="selectService('fcl')">Cotizar FCL <i class="fa-solid fa-chevron-right"></i></a>
-                </div>
-
-                <!-- Card 3 -->
-                <div class="service-card">
-                    <div class="card-icon">🌊</div>
-                    <h3>TRANSPORTE MARÍTIMO</h3>
-                    <p>Coordinación de transporte marítimo internacional y opciones con diferentes navieras líderes.</p>
-                    <a href="#cotizador" class="card-link" onclick="selectService('maritimo')">Cotizar Marítimo <i class="fa-solid fa-chevron-right"></i></a>
-                </div>
-
-                <!-- Card 4 -->
-                <div class="service-card">
-                    <div class="card-icon">✈️</div>
-                    <h3>FLETE AÉREO</h3>
-                    <p>Soluciones rápidas y eficientes para mercancías que requieren transporte aéreo internacional.</p>
-                    <a href="#cotizador" class="card-link" onclick="selectService('aereo')">Cotizar Aéreo <i class="fa-solid fa-chevron-right"></i></a>
-                </div>
-
-                <!-- Card 5 -->
-                <div class="service-card">
-                    <div class="card-icon">🚛</div>
-                    <h3>FLETE TERRESTRE</h3>
-                    <p>Transporte terrestre especializado principalmente desde puertos de Chile hacia cualquier destino en Bolivia.</p>
-                    <a href="#cotizador" class="card-link" onclick="selectService('terrestre')">Cotizar Terrestre <i class="fa-solid fa-chevron-right"></i></a>
-                </div>
-
-                <!-- Card 6 -->
-                <div class="service-card">
-                    <div class="card-icon">📑</div>
-                    <h3>GESTIÓN DOCUMENTAL</h3>
-                    <p>Coordinación de documentos clave (Facturas, Packing List, BL) requeridos para importación y exportación.</p>
-                    <a href="#cotizador" class="card-link" onclick="selectService('documental')">Solicitar Gestión <i class="fa-solid fa-chevron-right"></i></a>
-                </div>
-
-                <!-- Card 7 -->
-                <div class="service-card">
-                    <div class="card-icon">🔎</div>
-                    <h3>VERIFICACIÓN DE PROVEEDORES</h3>
-                    <p>Apoyo en la verificación y validación de proveedores en origen antes de realizar cualquier transferencia o compra.</p>
-                    <a href="#cotizador" class="card-link" onclick="selectService('asesoria')">Verificar Proveedor <i class="fa-solid fa-chevron-right"></i></a>
-                </div>
-
-                <!-- Card 8 -->
-                <div class="service-card">
-                    <div class="card-icon">🤝</div>
-                    <h3>ASESORÍA PERSONALIZADA</h3>
-                    <p>Orientación técnica y comercial para personas y empresas que desean comenzar a importar con éxito.</p>
-                    <a href="#cotizador" class="card-link" onclick="selectService('asesoria')">Solicitar Asesoría <i class="fa-solid fa-chevron-right"></i></a>
-                </div>
+            <!-- Grilla dinámica de productos -->
+            <div class="catalog-grid" id="publicCatalogGrid">
+                <!-- Se llena dinámicamente desde catalog.js / Firestore -->
             </div>
         </div>
     </section>
 
-    <!-- ==================== 4. ORÍGENES Y RUTAS ==================== -->
-    <section id="rutas" class="section-padding bg-dark text-white">
+    <!-- ==================== COTIZADOR DINÁMICO ==================== -->
+    <section id="cotizador" class="section-padding bg-white">
         <div class="container">
             <div class="section-header text-center">
-                <span class="subheading text-orange">RUTAS INTERNACIONALES</span>
-                <h2>CONECTAMOS EL MUNDO CON BOLIVIA</h2>
-                <div class="title-bar bg-orange"></div>
-                <p class="section-desc">
-                    Gestionamos operaciones logísticas desde diferentes puntos del mundo hacia Bolivia, adaptándonos al origen, tipo de carga y necesidades de cada cliente.
-                </p>
-            </div>
-
-            <div class="routes-grid">
-                <div class="route-box">
-                    <span class="flag">🇨🇳</span>
-                    <h3>China</h3>
-                    <p>Yiwu, Guangzhou, Foshan, Ningbo, Shanghai, Shenzhen, Qingdao, Tianjin, etc.</p>
-                </div>
-                <div class="route-box">
-                    <span class="flag">🇺🇸</span>
-                    <h3>Estados Unidos</h3>
-                    <p>Los Angeles, Long Beach, Miami, Houston, New York, Savannah, etc.</p>
-                </div>
-                <div class="route-box">
-                    <span class="flag">🇨🇱</span>
-                    <h3>Chile – ZOFRI</h3>
-                    <p>Zona Franca Iquique y Puerto de Arica para fletes y cargas consolidación rápida.</p>
-                </div>
-                <div class="route-box">
-                    <span class="flag">🇪🇺</span>
-                    <h3>Europa</h3>
-                    <p>Coordinación desde principales puertos e industrias de la Unión Europea.</p>
-                </div>
-                <div class="route-box">
-                    <span class="flag">🌎</span>
-                    <h3>Otros Orígenes</h3>
-                    <p>Conexiones logísticas globales adaptadas a tu proveedor.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- ==================== 5. ¿POR QUÉ CF GLOBAL CARGO? ==================== -->
-    <section class="section-padding bg-white">
-        <div class="container">
-            <div class="section-header text-center">
-                <span class="subheading">VENTAJAS COMPETITIVAS</span>
-                <h2>TU ALIADO ESTRATÉGICO EN IMPORTACIÓN Y LOGÍSTICA</h2>
+                <span class="subheading">SISTEMA DINÁMICO</span>
+                <h2>¿QUÉ SERVICIO NECESITAS?</h2>
                 <div class="title-bar"></div>
             </div>
 
-            <div class="grid-reasons">
-                <div class="reason-item">
-                    <div class="check-icon">✓</div>
-                    <div>
-                        <h4>Asesoramiento personalizado</h4>
-                        <p>Te acompañamos durante las diferentes etapas de tu operación logística.</p>
+            <!-- Selector de 8 servicios -->
+            <div class="service-selector-grid">
+                <button class="selector-btn active" onclick="switchForm('lcl')"><span class="icon">📦</span><span class="label">LCL / China</span></button>
+                <button class="selector-btn" onclick="switchForm('zofri')"><span class="icon">📦</span><span class="label">Caja ZOFRI</span></button>
+                <button class="selector-btn" onclick="switchForm('fcl')"><span class="icon">🚢</span><span class="label">FCL Contenedor</span></button>
+                <button class="selector-btn" onclick="switchForm('maritimo')"><span class="icon">🌊</span><span class="label">Marítimo</span></button>
+                <button class="selector-btn" onclick="switchForm('aereo')"><span class="icon">✈️</span><span class="label">Flete Aéreo</span></button>
+                <button class="selector-btn" onclick="switchForm('terrestre')"><span class="icon">🚛</span><span class="label">Terrestre</span></button>
+                <button class="selector-btn" onclick="switchForm('documental')"><span class="icon">📑</span><span class="label">Documental</span></button>
+                <button class="selector-btn" onclick="switchForm('asesoria')"><span class="icon">🤝</span><span class="label">Asesoría</span></button>
+            </div>
+
+            <!-- Contenedor de Formularios -->
+            <div class="form-container-box">
+                <!-- Formulario LCL -->
+                <form id="form-lcl" class="quote-form active-form" onsubmit="handleQuoteSubmit(event, 'lcl')">
+                    <h3>COTIZA TU CARGA CONSOLIDADA DESDE CHINA 🇨🇳</h3>
+                    <div class="form-grid" style="margin-top: 20px;">
+                        <div class="form-group col-6"><label>Mercancía *</label><input type="text" id="lcl-mercancia" required placeholder="Ej. Bicicletas eléctricas"></div>
+                        <div class="form-group col-6"><label>Metros Cúbicos (CBM) *</label><input type="number" step="0.01" id="lcl-cbm" required placeholder="8"></div>
+                        <div class="form-group col-6"><label>Nombre Completo *</label><input type="text" id="lcl-nombre" required placeholder="Tu nombre"></div>
+                        <div class="form-group col-6"><label>WhatsApp *</label><input type="tel" id="lcl-whatsapp" required placeholder="71234567"></div>
                     </div>
-                </div>
-                <div class="reason-item">
-                    <div class="check-icon">✓</div>
-                    <div>
-                        <h4>Transparencia en costos</h4>
-                        <p>Buscamos que conozcas los costos reales de tu operación antes de tomar decisiones.</p>
-                    </div>
-                </div>
-                <div class="reason-item">
-                    <div class="check-icon">✓</div>
-                    <div>
-                        <h4>Soluciones LCL y FCL</h4>
-                        <p>Adaptamos la modalidad de transporte al volumen y características de tu carga.</p>
-                    </div>
-                </div>
-                <div class="reason-item">
-                    <div class="check-icon">✓</div>
-                    <div>
-                        <h4>Gestión integral</h4>
-                        <p>Coordinamos diferentes etapas operativas desde el origen hasta destino en Bolivia.</p>
-                    </div>
-                </div>
-                <div class="reason-item">
-                    <div class="check-icon">✓</div>
-                    <div>
-                        <h4>Optimización de costos</h4>
-                        <p>Buscamos alternativas eficientes que mejoren la rentabilidad de tu importación.</p>
-                    </div>
-                </div>
-                <div class="reason-item">
-                    <div class="check-icon">✓</div>
-                    <div>
-                        <h4>Atención personalizada</h4>
-                        <p>Atendemos de manera específica las particularidades de cada tipo de mercancía.</p>
-                    </div>
-                </div>
+                    <button type="submit" class="btn-submit-quote">ENVIAR COTIZACIÓN LCL POR WHATSAPP</button>
+                </form>
+                <!-- Los demás formularios (zofri, fcl, etc.) se estructuran igual modularmente -->
             </div>
         </div>
     </section>
 
-    <!-- ==================== 6. NOSOTROS ==================== -->
-    <section id="nosotros" class="section-padding bg-light">
-        <div class="container">
-            <div class="about-card">
-                <div class="section-header text-center">
-                    <span class="subheading">NOSOTROS</span>
-                    <h2>SOBRE CF GLOBAL CARGO</h2>
-                    <div class="title-bar"></div>
-                </div>
-                <p class="about-text text-center">
-                    CF GLOBAL CARGO IMPORT & LOGISTICS es una empresa dedicada a brindar soluciones integrales de importación y logística internacional, conectando proveedores, cargas y oportunidades comerciales con Bolivia.<br><br>
-                    Nuestro objetivo es acompañar a emprendedores, empresas e importadores durante sus operaciones, brindando asesoramiento, coordinación logística y soluciones adaptadas a las necesidades de cada carga.
-                </p>
-
-                <div class="grid-mvo">
-                    <div class="mvo-box">
-                        <div class="mvo-icon"><i class="fa-solid fa-bullseye"></i></div>
-                        <h3>MISIÓN</h3>
-                        <p>Brindar soluciones integrales de importación y logística internacional que permitan a emprendedores y empresas gestionar sus operaciones de manera segura, eficiente y rentable, proporcionando asesoramiento y visibilidad sobre los costos reales de cada importación.</p>
-                    </div>
-
-                    <div class="mvo-box">
-                        <div class="mvo-icon"><i class="fa-solid fa-eye"></i></div>
-                        <h3>VISIÓN</h3>
-                        <p>Ser una empresa reconocida en Bolivia por brindar soluciones confiables de importación y logística internacional, destacándonos por nuestra precisión operativa, asesoramiento preventivo y optimización de costos en la cadena de suministro.</p>
-                    </div>
-
-                    <div class="mvo-box">
-                        <div class="mvo-icon"><i class="fa-solid fa-flag-checkered"></i></div>
-                        <h3>OBJETIVO</h3>
-                        <p>Consolidarnos como un socio logístico estratégico para los importadores bolivianos, facilitando el comercio internacional desde diferentes puntos de origen hacia Bolivia mediante servicios especializados de consolidación LCL/FCL, gestión logística y asesoramiento integral en costos.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- ==================== 20 & 21. COMUNIDADES WHATSAPP & REDES ==================== -->
-    <section id="comunidades" class="section-padding bg-dark text-white">
-        <div class="container">
-            <div class="section-header text-center">
-                <span class="subheading text-orange">COMUNIDAD DE IMPORTADORES</span>
-                <h2>APRENDE, IMPORTA Y CRECE CON CF GLOBAL CARGO</h2>
-                <div class="title-bar bg-orange"></div>
-                <p class="section-desc">
-                    Forma parte de nuestra comunidad y recibe información, novedades, oportunidades y contenido útil para tus operaciones de importación.
-                </p>
-            </div>
-
-            <div class="community-grid">
-                <!-- GRUPO 1 CHINA -->
-                <div class="community-card">
-                    <div class="flag-header">🇨🇳 CHINA → BOLIVIA</div>
-                    <h3>CONSOLIDACIÓN DE CHINA</h3>
-                    <p>Únete a nuestro grupo de WhatsApp para recibir novedades sobre salidas de contenedores, consolidados, proveedores, tips de importación y avisos importantes.</p>
-                    <ul class="community-features">
-                        <li><i class="fa-solid fa-check text-orange"></i> Fechas de salida de contenedores</li>
-                        <li><i class="fa-solid fa-check text-orange"></i> Videos y fotos de carga en almacén</li>
-                        <li><i class="fa-solid fa-check text-orange"></i> Consejos y capacitaciones</li>
-                    </ul>
-                    <a href="https://chat.whatsapp.com/TU_ENLACE_GRUPO_CHINA" target="_blank" class="btn-community">
-                        <span>🟧</span> UNIRME AL GRUPO DE CHINA
-                    </a>
-                </div>
-
-                <!-- GRUPO 2 ZOFRI -->
-                <div class="community-card">
-                    <div class="flag-header">🇨🇱 ZOFRI IQUIQUE → BOLIVIA</div>
-                    <h3>CONSOLIDACIÓN ZOFRI – IQUIQUE</h3>
-                    <p>Conoce novedades sobre cargas, operaciones en Zona Franca Iquique, proveedores y oportunidades comerciales directamente hacia Bolivia.</p>
-                    <ul class="community-features">
-                        <li><i class="fa-solid fa-check text-orange"></i> Novedades de ZOFRI y salidas</li>
-                        <li><i class="fa-solid fa-check text-orange"></i> Oportunidades de productos</li>
-                        <li><i class="fa-solid fa-check text-orange"></i> Preguntas y respuestas logísticas</li>
-                    </ul>
-                    <a href="https://chat.whatsapp.com/TU_ENLACE_GRUPO_ZOFRI" target="_blank" class="btn-community">
-                        <span>🟧</span> UNIRME AL GRUPO DE ZOFRI – IQUIQUE
-                    </a>
-                </div>
-            </div>
-
-            <!-- REDES SOCIALES -->
-            <div class="social-section text-center">
-                <h3>SÍGUENOS EN NUESTRAS REDES</h3>
-                <p>Conoce nuestras operaciones, novedades, consejos de importación, videos, fotografías y contenido relacionado con logística y comercio internacional.</p>
-                <div class="social-icons">
-                    <a href="https://tiktok.com/@CFGLOBALCARGO" target="_blank" aria-label="TikTok" class="social-btn tiktok"><i class="fa-brands fa-tiktok"></i></a>
-                    <a href="https://facebook.com/CFGLOBALCARGO" target="_blank" aria-label="Facebook" class="social-btn facebook"><i class="fa-brands fa-facebook-f"></i></a>
-                    <a href="https://instagram.com/CFGLOBALCARGO" target="_blank" aria-label="Instagram" class="social-btn instagram"><i class="fa-brands fa-instagram"></i></a>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- FOOTER -->
-    <footer class="footer">
-        <div class="container footer-content">
-            <p>&copy; 2026 CF GLOBAL CARGO IMPORT & LOGISTICS. Todos los derechos reservados.</p>
-            <p>Conectando el mundo con Bolivia 🇧🇴</p>
-        </div>
+    <footer class="footer bg-dark text-white text-center" style="padding: 30px 0; font-size: 0.85rem;">
+        <p>&copy; 2026 CF GLOBAL CARGO IMPORT & LOGISTICS. Todos los derechos reservados.</p>
     </footer>
 
-    <script src="js/main.js"></script>
+    <script type="module" src="js/catalog.js"></script>
+    <script src="js/cotizador.js"></script>
 </body>
 </html>
