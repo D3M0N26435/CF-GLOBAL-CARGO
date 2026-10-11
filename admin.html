@@ -3,40 +3,125 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CF GLOBAL CARGO — Panel Admin</title>
+    <title>Panel de Administración — CF Global Cargo</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/main.css">
 </head>
-<body class="admin-body">
+<body style="background: var(--bg-light);">
 
-    <!-- LOGIN SECTION -->
-    <div id="loginSection" style="display:flex; justify-content:center; align-items:center; min-height:100vh;">
-        <div class="modal-card" style="max-width: 400px;">
-            <h2>Admin Login</h2>
-            <form id="loginForm" style="margin-top: 20px;">
-                <div class="form-group" style="margin-bottom:15px;"><label>Correo</label><input type="email" id="loginEmail" required></div>
-                <div class="form-group" style="margin-bottom:15px;"><label>Contraseña</label><input type="password" id="loginPassword" required></div>
-                <button type="submit" class="btn-submit-quote">Ingresar</button>
+    <!-- ==================== LOGIN SECTION ==================== -->
+    <section id="loginSection" style="display: flex; justify-content: center; align-items: center; height: 100vh;">
+        <div style="background: var(--white); padding: 40px; border-radius: 16px; box-shadow: 0 10px 25px rgba(0,0,0,0.05); width: 100%; max-width: 400px; border: 1px solid var(--border-color);">
+            <div class="text-center" style="margin-bottom: 25px;">
+                <h2 style="color: var(--primary-blue); font-size: 1.5rem;">ACCESO ADMINISTRADOR</h2>
+                <p style="color: var(--text-light); font-size: 0.85rem;">CF Global Cargo — Gestión de Catálogo</p>
+            </div>
+            <form id="loginForm">
+                <div class="form-group" style="margin-bottom: 15px;">
+                    <label style="font-size: 0.85rem; font-weight: 750;">Correo Electrónico</label>
+                    <input type="email" id="loginEmail" required placeholder="admin@cfglobalcargo.com" style="width:100%; padding:10px; border:1px solid var(--border-color); border-radius:6px;">
+                </div>
+                <div class="form-group" style="margin-bottom: 20px;">
+                    <label style="font-size: 0.85rem; font-weight: 750;">Contraseña</label>
+                    <input type="password" id="loginPassword" required placeholder="••••••••" style="width:100%; padding:10px; border:1px solid var(--border-color); border-radius:6px;">
+                </div>
+                <button type="submit" class="btn-cotizar-header" style="width: 100%; justify-content: center; border:none; cursor:pointer;">INGRESAR AL PANEL</button>
             </form>
         </div>
-    </div>
+    </section>
 
-    <!-- DASHBOARD -->
-    <div id="adminDashboard" style="display:none;">
-        <header class="admin-header">
-            <h3>Panel de Control CF Global Cargo</h3>
-            <button id="btnLogout" class="btn-admin-login">Cerrar Sesión</button>
+    <!-- ==================== ADMIN DASHBOARD ==================== -->
+    <div id="adminDashboard" style="display: none;">
+        <!-- Header Admin -->
+        <header style="background: var(--primary-blue); color: var(--white); padding: 15px 30px; display: flex; justify-content: space-between; align-items: center;">
+            <h2 style="font-size: 1.2rem;">Panel de Control ⚙️ — CF Global Cargo</h2>
+            <div style="display: flex; gap: 15px; align-items: center;">
+                <a href="index.html" style="background: rgba(255,255,255,0.15); color: var(--white); padding: 8px 16px; border-radius: 6px; text-decoration: none; font-size: 0.85rem; font-weight: 700;">
+                    <i class="fa-solid fa-house"></i> Volver al Inicio
+                </a>
+                <button id="btnLogout" style="background: var(--accent-orange); color: var(--white); border: none; padding: 8px 16px; border-radius: 6px; cursor: pointer; font-weight: 700; font-size: 0.85rem;">
+                    Cerrar Sesión
+                </button>
+            </div>
         </header>
-        <div class="admin-content">
-            <button class="btn-cotizar-header" id="btnOpenNew" style="margin-bottom: 20px;">+ Agregar Producto</button>
-            <table class="admin-table">
-                <thead>
-                    <tr><th>Imagen</th><th>Nombre</th><th>Origen</th><th>P. Unitario</th><th>Puesto Bolivia 🇧🇴</th><th>Acciones</th></tr>
-                </thead>
-                <tbody id="adminTableBody"></tbody>
-            </table>
-        </div>
+
+        <main class="container" style="padding: 40px 20px;">
+            <!-- Formulario para Agregar Producto -->
+            <div style="background: var(--white); padding: 30px; border-radius: 12px; border: 1px solid var(--border-color); margin-bottom: 40px;">
+                <h3 style="color: var(--primary-blue); margin-bottom: 20px;">📦 Registrar Nuevo Producto en Catálogo</h3>
+                <form id="addProductForm" class="form-grid">
+                    <div class="form-group col-6">
+                        <label>Categoría / Origen *</label>
+                        <select id="prod-categoria" required style="width:100%; padding:10px; border:1px solid var(--border-color); border-radius:6px;">
+                            <option value="china">🇨🇳 Productos desde China</option>
+                            <option value="zofri">🇨🇱 Productos desde ZOFRI - Iquique</option>
+                        </select>
+                    </div>
+                    <div class="form-group col-6">
+                        <label>Nombre del Producto *</label>
+                        <input type="text" id="prod-nombre" required placeholder="Ej. Bicicleta Eléctrica Plegable" style="width:100%; padding:10px; border:1px solid var(--border-color); border-radius:6px;">
+                    </div>
+                    <div class="form-group col-12">
+                        <label>Descripción Corta *</label>
+                        <textarea id="prod-desc" required rows="2" placeholder="Detalles clave del producto..." style="width:100%; padding:10px; border:1px solid var(--border-color); border-radius:6px;"></textarea>
+                    </div>
+                    <div class="form-group col-4">
+                        <label>Precio Unitario (USD) *</label>
+                        <input type="number" step="0.01" id="prod- precioUnitario" required placeholder="350" style="width:100%; padding:10px; border:1px solid var(--border-color); border-radius:6px;">
+                    </div>
+                    <div class="form-group col-4">
+                        <label>Precio por Caja (USD) *</label>
+                        <input type="number" step="0.01" id="prod-precioCaja" required placeholder="3200" style="width:100%; padding:10px; border:1px solid var(--border-color); border-radius:6px;">
+                    </div>
+                    <div class="form-group col-4">
+                        <label>Unidades por Caja *</label>
+                        <input type="number" id="prod-unidadesCaja" required placeholder="10" style="width:100%; padding:10px; border:1px solid var(--border-color); border-radius:6px;">
+                    </div>
+                    <div class="form-group col-6">
+                        <label>Precio Puesto en Bolivia (Ej. $420 USD) *</label>
+                        <input type="text" id="prod-precioBolivia" required placeholder="$420 USD puesto en La Paz/Oruro" style="width:100%; padding:10px; border:1px solid var(--border-color); border-radius:6px;">
+                    </div>
+                    <div class="form-group col-6">
+                        <label>URL de la Fotografía (Imagen) *</label>
+                        <input type="url" id="prod-imagenUrl" required placeholder="https://images.unsplash.com/..." style="width:100%; padding:10px; border:1px solid var(--border-color); border-radius:6px;">
+                    </div>
+                    <div class="form-group col-6">
+                        <label>Disponibilidad *</label>
+                        <select id="prod-disponibilidad" style="width:100%; padding:10px; border:1px solid var(--border-color); border-radius:6px;">
+                            <option value="disponible">Disponible</option>
+                            <option value="proxima_llegada">Próxima Llegada</option>
+                            <option value="agotado">Agotado</option>
+                        </select>
+                    </div>
+                    <div class="form-group col-12" style="margin-top: 10px;">
+                        <button type="submit" class="btn-cotizar-header" style="border:none; cursor:pointer;">GUARDAR Y PUBLICAR PRODUCTO</button>
+                    </div>
+                </form>
+            </div>
+
+            <!-- Listado de Productos -->
+            <div style="background: var(--white); padding: 30px; border-radius: 12px; border: 1px solid var(--border-color);">
+                <h3 style="color: var(--primary-blue); margin-bottom: 20px;">📋 Productos Registrados en Base de Datos</h3>
+                <div style="overflow-x: auto;">
+                    <table style="width: 100%; border-collapse: collapse; text-align: left;">
+                        <thead>
+                            <tr style="border-bottom: 2px solid var(--border-color); color: var(--text-light); font-size: 0.85rem;">
+                                <th style="padding: 10px;">Imagen</th>
+                                <th style="padding: 10px;">Nombre</th>
+                                <th style="padding: 10px;">Categoría</th>
+                                <th style="padding: 10px;">Precio Unit.</th>
+                                <th style="padding: 10px;">Precio Bolivia</th>
+                                <th style="padding: 10px;">Acción</th>
+                            </tr>
+                        </thead>
+                        <tbody id="adminTableBody">
+                            <!-- Se llena dinámicamente -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </main>
     </div>
 
     <script type="module" src="js/admin.js"></script>

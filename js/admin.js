@@ -1,14 +1,14 @@
 // js/admin.js
-import { auth, db, storage } from './firebase-config.js';
+import { auth, db } from './firebase-config.js';
 import { signInWithEmailAndPassword, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
-import { collection, addDoc, getDocs, doc, updateDoc, deleteDoc, query, orderBy } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
-import { ref, uploadBytes, getDownloadURL } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-storage.js";
+import { collection, addDoc, getDocs, doc, deleteDoc, query, orderBy } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
 
 const loginSection = document.getElementById('loginSection');
 const adminDashboard = document.getElementById('adminDashboard');
 const loginForm = document.getElementById('loginForm');
 const btnLogout = document.getElementById('btnLogout');
 const adminTableBody = document.getElementById('adminTableBody');
+const addProductForm = document.getElementById('addProductForm');
 
 let productsList = [];
 
@@ -30,15 +30,43 @@ loginForm.addEventListener('submit', async (e) => {
     try {
         await signInWithEmailAndPassword(auth, email, pass);
     } catch (error) {
-        alert('Credenciales incorrectas.');
+        alert('Credenciales incorrectas o error de acceso.');
     }
 });
 
 btnLogout.addEventListener('click', () => signOut(auth));
 
+// REGISTRAR PRODUCTO NUEVO
+addProductForm.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    
+    const nuevoProducto = {
+        categoria: document.getElementById('prod-categoria').value,
+        nombre: document.getElementById('prod-nombre').value.trim(),
+        descripcion: document.getElementById('prod-desc').value.trim(),
+        precioUnitario: parseFloat(document.getElementById('prod- precioUnitario')?.value || document.getElementById('prod-precioUnitario')?.value) || 0,
+        precioCaja: parseFloat(document.getElementById('prod-precioCaja').value) || 0,
+        unidadesCaja: parseInt(document.getElementById('prod-unidadesCaja').value) || 0,
+        precioBolivia: document.getElementById('prod-precioBolivia').value.trim(),
+        imagenUrl: document.getElementById('prod-imagenUrl').value.trim(),
+        disponibilidad: document.getElementById('prod-disponibilidad').value,
+        fechaCreacion: new Date()
+    };
+
+    try {
+        await addDoc(collection(db, "productos"), nuevoProducto);
+        alert('¡Producto agregado exitosamente al catálogo!');
+        addProductForm.reset();
+        loadAdminProducts();
+    } catch (error) {
+        console.error("Error al guardar producto:", error);
+        alert('Error al registrar el producto en Firestore.');
+    }
+});
+
 async function loadAdminProducts() {
     if (!adminTableBody) return;
-    adminTableBody.innerHTML = '<tr><td colspan="6" class="text-center">Cargando...</td></tr>';
+    adminTableBody.innerHTML = '<tr><td colspan="6" class="text-center" style="padding:20px;">Cargando productos...</td></tr>';
     
     try {
         const q = query(collection(db, "productos"), orderBy("fechaCreacion", "desc"));
@@ -56,27 +84,31 @@ async function loadAdminProducts() {
 
 function renderAdminTable() {
     if (productsList.length === 0) {
-        adminTableBody.innerHTML = '<tr><td colspan="6" class="text-center">No hay productos registrados.</td></tr>';
+        adminTableBody.innerHTML = '<tr><td colspan="6" class="text-center" style="padding:20px;">No hay productos registrados.</td></tr>';
         return;
     }
 
     adminTableBody.innerHTML = productsList.map(p => `
-        <tr>
-            <td><img src="${p.imagenUrl || 'https://via.placeholder.com/50'}" class="img-thumb" alt=""></td>
-            <td><strong>${p.nombre}</strong></td>
-            <td>${p.categoria.toUpperCase()}</td>
-            <td>$${p.precioUnitario} USD</td>
-            <td><strong style="color:var(--accent-orange);">${p.precioBolivia}</strong></td>
-            <td>
-                <button onclick="deleteProd('${p.id}')" style="background:#FEE2E2; color:#B91C1C; border:none; padding:6px 10px; border-radius:4px; cursor:pointer;">Eliminar</button>
+        <tr style="border-bottom: 1px solid var(--border-color);">
+            <td style="padding: 10px;"><img src="${p.imagenUrl || 'https://via.placeholder.com/50'}" style="width:45px; height:45px; object-fit:cover; border-radius:6px;" alt=""></td>
+            <td style="padding: 10px;"><strong>${p.nombre}</strong></td>
+            <td style="padding: 10px;"><span style="font-size:0.75rem; font-weight:800; color:var(--accent-orange);">${p.categoria.toUpperCase()}</span></td>
+            <td style="padding: 10px;">$${p.precioUnitario} USD</td>
+            <td style="padding: 10px;"><strong style="color:var(--primary-blue);">${p.precioBolivia}</strong></td>
+            <td style="padding: 10px;">
+                <button onclick="deleteProd('${p.id}')" style="background:#FEE2E2; color:#B91C1C; border:none; padding:6px 12px; border-radius:4px; cursor:pointer; font-weight:700; font-size:0.75rem;">Eliminar</button>
             </td>
         </tr>
     `).join('');
 }
 
 window.deleteProd = async (id) => {
-    if (confirm('¿Desea eliminar este producto?')) {
-        await deleteDoc(doc(db, "productos", id));
-        loadAdminProducts();
+    if (confirm('¿Desea eliminar este producto permanentemente?')) {
+        try {
+            await deleteDoc(doc(db, "productos", id));
+            loadAdminProducts();
+        } catch (error) {
+            alert('Error al eliminar el producto.');
+        }
     }
 };
