@@ -1,5 +1,5 @@
 // js/cotizador.js
-const NUMERO_WHATSAPP_CF = "59169191099"; // Número oficial
+const NUMERO_WHATSAPP_CF = "59170000000"; 
 
 function switchForm(serviceKey) {
     document.querySelectorAll('.selector-btn').forEach(btn => {
@@ -28,15 +28,33 @@ window.handleQuoteSubmit = function(event, serviceType) {
     if (event) event.preventDefault();
     let mensaje = "";
 
-    if (serviceType === 'lcl') {
-        mensaje = `Hola, CF GLOBAL CARGO. Quiero solicitar una cotización de carga consolidada LCL.\n\nNombre: ${val('lcl-nombre')}\nOrigen: ${val('lcl-origen')}\nMercancía: ${val('lcl-mercancia')}\nCBM: ${val('lcl-cbm')}\nPeso: ${val('lcl-peso')} kg\nDestino: ${val('lcl-destino')}, Bolivia.\nWhatsApp: ${val('lcl-whatsapp')}\n\nQuisiera recibir información sobre costos y condiciones.`;
-    } else if (serviceType === 'zofri') {
-        mensaje = `Hola, CF GLOBAL CARGO. Quiero solicitar cotización de carga por caja ZOFRI - Iquique 🇨🇱.\n\nNombre: ${val('zofri-nombre')}\nCajas: ${val('zofri-cajas')}\nMercancía: ${val('zofri-mercancia')}\nCBM: ${document.getElementById('zofri-cbm-val')?.innerText}\nPeso Total: ${val('zofri-peso-total')}\nDestino: ${val('zofri-destino')}, Bolivia.\nWhatsApp: ${val('zofri-whatsapp')}`;
-    } else {
-        mensaje = `Hola, CF GLOBAL CARGO. Deseo solicitar una cotización logística.`;
+    switch(serviceType) {
+        case 'lcl':
+            mensaje = `Hola, CF GLOBAL CARGO. Quiero cotizar Carga Consolidada LCL 🇨🇳.\n\n• Nombre: ${val('lcl-nombre')}\n• Origen: ${val('lcl-origen')}\n• Mercancía: ${val('lcl-mercancia')}\n• CBM: ${val('lcl-cbm')}\n• Peso: ${val('lcl-peso')} kg\n• Destino: ${val('lcl-destino')}, Bolivia\n• WhatsApp: ${val('lcl-whatsapp')}`;
+            break;
+        case 'zofri':
+            mensaje = `Hola, CF GLOBAL CARGO. Quiero cotizar Carga por Caja ZOFRI 🇨🇱.\n\n• Nombre: ${val('zofri-nombre')}\n• Cajas: ${val('zofri-cajas')}\n• Mercancía: ${val('zofri-mercancia')}\n• CBM: ${document.getElementById('zofri-cbm-val')?.innerText}\n• Peso Total: ${val('zofri-peso-total')}\n• Destino: ${val('zofri-destino')}, Bolivia\n• WhatsApp: ${val('zofri-whatsapp')}`;
+            break;
+        case 'fcl':
+            mensaje = `Hola, CF GLOBAL CARGO. Quiero cotizar Contenedor Completo FCL 🚢.\n\n• Nombre: ${val('fcl-nombre')}\n• Origen: ${val('fcl-pais')} (${val('fcl-puerto-select')})\n• Contenedor: ${val('fcl-tipo-contenedor')} (${val('fcl-cantidad')} unid.)\n• Tránsito: ${val('fcl-transito')}\n• Mercancía: ${val('fcl-mercancia')}\n• Peso: ${val('fcl-peso')} kg\n• Destino: ${val('fcl-destino')}, Bolivia\n• WhatsApp: ${val('fcl-whatsapp')}`;
+            break;
+        case 'maritimo':
+            mensaje = `Hola, CF GLOBAL CARGO. Quiero cotizar Transporte Marítimo 🌊.\n\n• Nombre: ${val('mar-nombre')}\n• Origen: ${val('mar-pais')} (${val('mar-puerto')})\n• Naviera: ${val('mar-naviera')}\n• Equipo: ${val('mar-equipo')}\n• Mercancía: ${val('mar-mercancia')}\n• Destino: ${val('mar-destino')}, Bolivia\n• WhatsApp: ${val('mar-whatsapp')}`;
+            break;
+        case 'aereo':
+            mensaje = `Hola, CF GLOBAL CARGO. Quiero cotizar Flete Aéreo ✈️.\n\n• Nombre: ${val('aereo-nombre')}\n• Origen: ${val('aereo-origen')}\n• Mercancía: ${val('aereo-mercancia')}\n• Peso: ${val('aereo-peso')} kg\n• Volumen: ${val('aereo-volumen')}\n• Destino: ${val('aereo-destino')}, Bolivia\n• WhatsApp: ${val('aereo-whatsapp')}`;
+            break;
+        case 'terrestre':
+            mensaje = `Hola, CF GLOBAL CARGO. Quiero cotizar Flete Terrestre 🚛.\n\n• Nombre: ${val('terr-nombre')}\n• Carga desde: ${val('terr-puerto')}\n• Despacho: ${val('terr-despacho')}\n• Mercancía: ${val('terr-mercancia')}\n• Peso: ${val('terr-peso')} kg\n• Aduana Destino: ${val('terr-destino')}\n• WhatsApp: ${val('terr-whatsapp')}`;
+            break;
+        case 'documental':
+            mensaje = `Hola, CF GLOBAL CARGO. Solicito Gestión Documental 📑.\n\n• Nombre: ${val('doc-nombre')}\n• Origen: ${val('doc-pais')}\n• Servicio: ${val('doc-servicio')}\n• Detalle: ${val('doc-mensaje')}\n• WhatsApp: ${val('doc-whatsapp')}`;
+            break;
+        case 'asesoria':
+            mensaje = `Hola, CF GLOBAL CARGO. Solicito Asesoría Personalizada 🤝.\n\n• Nombre: ${val('ase-nombre')}\n• Requerimiento: ${val('ase-opcion')}\n• Producto: ${val('ase-producto') || 'N/A'}\n• Consulta: ${val('ase-consulta')}\n• WhatsApp: ${val('ase-whatsapp')}`;
+            break;
     }
 
-    // Mostrar modal con resumen "SOLICITUD PREPARADA"
     document.getElementById('summaryPreviewText').innerText = mensaje;
     const waUrl = `https://wa.me/${NUMERO_WHATSAPP_CF}?text=${encodeURIComponent(mensaje)}`;
     document.getElementById('btnSendWhatsappFinal').href = waUrl;
