@@ -3,6 +3,11 @@ import { auth, db } from './firebase-config.js';
 import { signInWithEmailAndPassword, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
 import { collection, addDoc, getDocs, doc, deleteDoc, query, orderBy } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
 
+// ================= CONFIGURACIÓN DE CLOUDINARY =================
+const CLOUD_NAME = "dsbzdsrgk";       // <--- Cambia esto por tu Cloud name real de Cloudinary
+const UPLOAD_PRESET = "cf-global-cargo"; // <--- Cambia esto por tu Preset "Unsigned" de Cloudinary
+// ==============================================================
+
 const loginSection = document.getElementById('loginSection');
 const adminDashboard = document.getElementById('adminDashboard');
 const loginForm = document.getElementById('loginForm');
@@ -36,31 +41,72 @@ loginForm.addEventListener('submit', async (e) => {
 
 btnLogout.addEventListener('click', () => signOut(auth));
 
-// REGISTRAR PRODUCTO NUEVO
+// REGISTRAR PRODUCTO NUEVO CON IMAGEN DESDE DISPOSITIVO
 addProductForm.addEventListener('submit', async (e) => {
     e.preventDefault();
     
-    const nuevoProducto = {
-        categoria: document.getElementById('prod-categoria').value,
-        nombre: document.getElementById('prod-nombre').value.trim(),
-        descripcion: document.getElementById('prod-desc').value.trim(),
-        precioUnitario: parseFloat(document.getElementById('prod- precioUnitario')?.value || document.getElementById('prod-precioUnitario')?.value) || 0,
-        precioCaja: parseFloat(document.getElementById('prod-precioCaja').value) || 0,
-        unidadesCaja: parseInt(document.getElementById('prod-unidadesCaja').value) || 0,
-        precioBolivia: document.getElementById('prod-precioBolivia').value.trim(),
-        imagenUrl: document.getElementById('prod-imagenUrl').value.trim(),
-        disponibilidad: document.getElementById('prod-disponibilidad').value,
-        fechaCreacion: new Date()
-    };
+    const imageInput = document.getElementById('prod-imagenFile');
+    const file = imageInput.files[0];
+
+    if (!file) {
+        alert('Por favor selecciona una imagen del producto.');
+        return;
+    }
+
+    const submitBtn = addProductForm.querySelector('button[type="submit"]');
 
     try {
+        // Deshabilitar botón y mostrar estado de carga mientras sube la foto
+        submitBtn.disabled = true;
+        submitBtn.textContent = 'Subiendo imagen a la nube... ⏳';
+
+        // 1. Subir la imagen a Cloudinary directamente desde el navegador
+        const formData = new FormData();
+        formData.append('file', file);
+        formData.append('upload_preset', UPLOAD_PRESET);
+
+        const cloudinaryRes = await fetch(`https://api.cloudinary.com/v1_1/${CLOUD_NAME}/image/upload`, {
+            method: 'POST',
+            body: formData
+        });
+
+        const cloudinaryData = await cloudinaryRes.json();
+
+        if (!cloudinaryData.secure_url) {
+            throw new Error('No se pudo obtener la URL de la imagen en Cloudinary.');
+        }
+
+        const imagenUrlFinal = cloudinaryData.secure_url;
+
+        submitBtn.textContent = 'Guardando producto en base de datos... 📦';
+
+        // 2. Crear objeto del producto con la URL segura de Cloudinary
+        const nuevoProducto = {
+            categoria: document.getElementById('prod-categoria').value,
+            nombre: document.getElementById('prod-nombre').value.trim(),
+            descripcion: document.getElementById('prod-desc').value.trim(),
+            precioUnitario: parseFloat(document.getElementById('prod-precioUnitario').value) || 0,
+            precioCaja: parseFloat(document.getElementById('prod-precioCaja').value) || 0,
+            unidadesCaja: parseInt(document.getElementById('prod-unidadesCaja').value) || 0,
+            precioBolivia: document.getElementById('prod-precioBolivia').value.trim(),
+            imagenUrl: imagenUrlFinal, // <--- URL generada por Cloudinary
+            disponibilidad: document.getElementById('prod-disponibilidad').value,
+            fechaCreacion: new Date()
+        };
+
+        // 3. Guardar en Firestore
         await addDoc(collection(db, "productos"), nuevoProducto);
-        alert('¡Producto agregado exitosamente al catálogo!');
+        
+        alert('¡Producto y fotografía subidos exitosamente!');
         addProductForm.reset();
         loadAdminProducts();
+
     } catch (error) {
-        console.error("Error al guardar producto:", error);
-        alert('Error al registrar el producto en Firestore.');
+        console.error("Error al registrar producto:", error);
+        alert('Hubo un error al subir la imagen o registrar el producto.');
+    } finally {
+        submitBtn.disabled = false;
+        submitBtn.textContent = 'GUARDAR Y PUBLICAR PRODUCTO';
     }
 });
 
