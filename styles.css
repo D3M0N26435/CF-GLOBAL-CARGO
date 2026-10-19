@@ -249,6 +249,7 @@ h1 span {
 .origins-panel h2 i { display: block; width: 64px; height: 4px; margin-left: 4px; border-radius: 5px; background: var(--orange); }
 .origin-grid { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 13px; }
 .origin-card {
+  position: relative;
   min-width: 0;
   min-height: 145px;
   display: flex;
@@ -258,14 +259,89 @@ h1 span {
   border: 1px solid rgba(116, 171, 250, .17);
   border-radius: 17px;
   background: linear-gradient(130deg, rgba(7, 48, 101, .8), rgba(8, 44, 90, .48));
+  cursor: pointer;
   transition: transform .22s ease, border-color .22s ease, box-shadow .22s ease;
 }
+.origin-card > div:last-of-type { padding-right: 27px; }
+.origin-card::after {
+  content: "➜";
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  width: 29px;
+  height: 29px;
+  display: grid;
+  place-items: center;
+  border: 1px solid rgba(255, 255, 255, .32);
+  border-radius: 50%;
+  color: #fff;
+  background: rgba(2, 25, 60, .72);
+  font-size: 17px;
+  line-height: 1;
+  transition: transform .2s ease, background-color .2s ease, border-color .2s ease;
+}
+.origin-card:hover::after, .origin-card:focus-visible::after { transform: translateX(2px); border-color: var(--orange); background: var(--orange); }
 .flag { width: 70px; height: 70px; flex: 0 0 70px; display: grid; place-items: center; border-radius: 50%; background: transparent; transition: transform .22s ease; }
 .flag-art { display: block; width: 50px; height: 34px; border-radius: 4px; filter: drop-shadow(0 3px 5px rgba(0, 8, 28, .32)); }
 .flag.globe { color: #fff; background: #087ee9; }
 .globe-icon { display: block; width: 39px; height: 39px; fill: none; stroke: currentColor; stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round; }
 .origin-card h3 { margin: 17px 0 10px; font-size: clamp(12px, 1.12vw, 16px); font-weight: 900; overflow-wrap: anywhere; }
 .origin-card p { margin: 0; color: #e1eaf7; font-size: clamp(12px, 1.02vw, 15px); line-height: 1.5; overflow-wrap: anywhere; }
+
+/* Ventana de detalle por origen */
+.origin-dialog {
+  width: min(720px, calc(100vw - 28px));
+  max-width: 720px;
+  max-height: min(90svh, 860px);
+  margin: auto;
+  padding: 0;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, .72);
+  border-radius: 23px;
+  color: #132846;
+  background: #f8fbff;
+  box-shadow: 0 28px 90px rgba(0, 10, 34, .42);
+}
+.origin-dialog::backdrop { background: rgba(1, 15, 38, .76); backdrop-filter: blur(5px); }
+.origin-dialog-content { position: relative; max-height: min(90svh, 860px); overflow-y: auto; padding: clamp(20px, 4vw, 34px); }
+.origin-dialog-close {
+  position: absolute;
+  top: 17px;
+  right: 18px;
+  z-index: 1;
+  width: 36px;
+  height: 36px;
+  display: grid;
+  place-items: center;
+  border: 0;
+  border-radius: 50%;
+  color: #31445f;
+  background: #e9eff7;
+  font-size: 25px;
+  line-height: 1;
+  cursor: pointer;
+  transition: color .2s ease, background-color .2s ease, transform .2s ease;
+}
+.origin-dialog-close:hover { color: #fff; background: var(--navy); transform: rotate(90deg); }
+.origin-dialog-heading { display: grid; grid-template-columns: 58px minmax(0, 1fr); align-items: center; gap: 14px; padding-right: 35px; }
+.origin-dialog-flag { width: 58px; height: 58px; display: grid; place-items: center; overflow: hidden; border: 1px solid #e4eaf2; border-radius: 50%; background: #fff; box-shadow: 0 4px 13px rgba(8, 35, 73, .1); }
+.origin-dialog-flag .flag-art { width: 45px; height: 30px; border-radius: 3px; filter: none; }
+.origin-dialog-flag .globe-icon { width: 34px; height: 34px; color: #087ee9; }
+.origin-dialog-kicker { margin: 0 0 4px; color: #e75d13; font-size: 10px; font-weight: 900; letter-spacing: .12em; }
+.origin-dialog-heading h2 { margin: 0; color: #092650; font-size: clamp(20px, 4vw, 30px); font-weight: 950; line-height: 1.1; letter-spacing: -.035em; }
+.origin-dialog-subtitle { margin: 5px 0 0; color: #5b6c82; font-size: 14px; line-height: 1.4; }
+.origin-dialog-image { height: clamp(145px, 25vw, 205px); margin: 20px 0 22px; border-radius: 15px; background: linear-gradient(0deg, rgba(4, 27, 61, .15), transparent 65%), url("assets/hero-bg.jpg") center 68% / cover no-repeat; box-shadow: 0 8px 22px rgba(6, 31, 68, .16); }
+.origin-dialog-section-title { margin: 0 0 10px; color: #102b50; font-size: 16px; font-weight: 900; }
+.origin-service-list { display: grid; gap: 9px; margin: 0; padding: 0; list-style: none; }
+.origin-service-list li { display: grid; grid-template-columns: 19px minmax(0, 1fr); gap: 9px; color: #34465f; font-size: 14px; line-height: 1.45; }
+.origin-service-list li::before { content: "◆"; padding-top: 1px; color: #123d78; font-size: 13px; }
+.origin-dialog-actions { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 24px; }
+.origin-dialog-actions .button { flex: 1 1 200px; min-height: 48px; padding: 12px 15px; border-radius: 11px; font-size: 12px; text-align: center; }
+.origin-dialog .button-outline { border: 1px solid rgba(5, 38, 83, .45); color: #0b2b56; background: #fff; }
+.origin-dialog .button-outline:hover { color: #fff; background: #0b2b56; }
+.origin-dialog-actions #originQuoteLink { justify-content: space-between; }
+.origin-dialog[open] { animation: dialog-appear .2s ease-out both; }
+@keyframes dialog-appear { from { opacity: 0; transform: translateY(8px) scale(.985); } to { opacity: 1; transform: translateY(0) scale(1); } }
 
 /* Secciones que se completarán después */
 .below-section { min-height: 220px; padding: 70px 7%; color: #0a2850; background: #f4f7fb; }
@@ -385,6 +461,7 @@ h1 span {
   .origins-panel h2 i { width: 30px; }
   .origin-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 9px; }
   .origin-card { min-height: 112px; flex-direction: column; align-items: flex-start; gap: 7px; padding: 12px; }
+  .origin-card > div:last-of-type { padding-right: 27px; }
   .flag { width: 48px; height: 42px; flex-basis: 42px; }
   .flag-art { width: 44px; height: 30px; }
   .globe-icon { width: 32px; height: 32px; }
@@ -414,6 +491,23 @@ h1 span {
   .flag-art { width: 47px; height: 32px; }
   .origin-card h3 { font-size: 14px; }
   .origin-card p { font-size: 13px; }
+}
+
+@media (max-width: 520px) {
+  .origin-dialog { width: calc(100vw - 18px); max-height: 94svh; border-radius: 19px; }
+  .origin-dialog-content { max-height: 94svh; padding: 18px 16px; }
+  .origin-dialog-close { top: 12px; right: 12px; width: 32px; height: 32px; }
+  .origin-dialog-heading { grid-template-columns: 48px minmax(0, 1fr); gap: 10px; padding-right: 28px; }
+  .origin-dialog-flag { width: 48px; height: 48px; }
+  .origin-dialog-flag .flag-art { width: 39px; height: 26px; }
+  .origin-dialog-kicker { font-size: 8px; }
+  .origin-dialog-heading h2 { font-size: clamp(17px, 5vw, 23px); }
+  .origin-dialog-subtitle { font-size: 12px; }
+  .origin-dialog-image { height: 145px; margin: 16px 0 18px; }
+  .origin-service-list { gap: 8px; }
+  .origin-service-list li { font-size: 13px; }
+  .origin-dialog-actions { flex-direction: column-reverse; gap: 8px; margin-top: 18px; }
+  .origin-dialog-actions .button { flex-basis: auto; width: 100%; min-height: 45px; }
 }
 
 @media (prefers-reduced-motion: reduce) {

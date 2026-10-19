@@ -102,6 +102,30 @@
     <section class="below-section" id="comunidades"><h2>Comunidades</h2><p>Únete a nuestra comunidad.</p></section>
     <section class="below-section" id="contacto"><h2>Cotiza tu importación</h2><p>Añade aquí tu formulario, WhatsApp o datos de contacto.</p></section>
   </main>
+
+  <dialog class="origin-dialog" id="originDialog" aria-labelledby="originDialogTitle" aria-describedby="originDialogSubtitle">
+    <div class="origin-dialog-content">
+      <button class="origin-dialog-close" id="originDialogClose" type="button" aria-label="Cerrar ventana">×</button>
+      <div class="origin-dialog-heading">
+        <span class="origin-dialog-flag" id="originDialogFlag" aria-hidden="true"></span>
+        <div>
+          <p class="origin-dialog-kicker">RUTA LOGÍSTICA INTERNACIONAL</p>
+          <h2 id="originDialogTitle"></h2>
+          <p class="origin-dialog-subtitle" id="originDialogSubtitle"></p>
+        </div>
+      </div>
+      <div class="origin-dialog-image" role="img" aria-label="Imagen ilustrativa de carga y transporte internacional"></div>
+      <h3 class="origin-dialog-section-title">Servicios disponibles</h3>
+      <ul class="origin-service-list" id="originServiceList"></ul>
+      <div class="origin-dialog-actions">
+        <a class="button button-outline" id="originServicesLink" href="#servicios">VER SERVICIOS</a>
+        <a class="button button-orange" id="originQuoteLink" href="#contacto">
+          <span id="originQuoteLabel">COTIZAR</span><span aria-hidden="true">➜</span>
+        </a>
+      </div>
+    </div>
+  </dialog>
+
   <script src="js/script.js"></script>
 </body>
 </html>
