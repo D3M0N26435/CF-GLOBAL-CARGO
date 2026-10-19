@@ -1,462 +1,107 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CF GLOBAL CARGO — Import & Logistics</title>
-    <!-- FontAwesome para Iconos -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="css/main.css">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#062653">
+  <title>CF Global Cargo | Import & Logistics</title>
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+  <header class="site-header">
+    <a class="brand" href="#inicio" aria-label="CF Global Cargo, inicio">
+      <!-- Reemplaza assets/logo.png por tu logo PNG transparente -->
+      <img src="assets/logo.png" alt="CF Global Cargo" class="brand-logo"
+           onerror="this.hidden=true; this.nextElementSibling.hidden=false">
+      <span class="brand-fallback" hidden>
+        <span class="brand-mark">✈</span>
+        <span class="brand-copy"><strong>CF GLOBAL <em>CARGO</em></strong><small>IMPORT &amp; LOGISTICS</small></span>
+      </span>
+    </a>
 
-    <!-- ==================== 1. MENÚ PRINCIPAL STICKY ==================== -->
-    <header class="header-sticky">
-        <div class="container header-container">
-            <!-- LOGO -->
-            <a href="#inicio" class="logo-container">
-                <div class="logo-text">
-                    <span class="logo-brand">CF GLOBAL</span>
-                    <span class="logo-sub">CARGO IMPORT & LOGISTICS</span>
-                </div>
-            </a>
+    <nav class="main-nav" id="mainNav" aria-label="Navegación principal">
+      <a class="active" href="#inicio">INICIO</a>
+      <a href="#servicios">SERVICIOS</a>
+      <a href="#catalogo">CATÁLOGO</a>
+      <a href="#nosotros">NOSOTROS</a>
+      <a href="#comunidades">COMUNIDADES</a>
+      <a href="#contacto">CONTACTO</a>
+    </nav>
 
-            <!-- MENÚ NAVEGACIÓN -->
-            <nav class="nav-menu">
-                <a href="#inicio" class="nav-link active">INICIO</a>
-                <a href="#servicios" class="nav-link">SERVICIOS</a>
-                <a href="#catalogo" class="nav-link">CATÁLOGO</a>
-                <a href="#nosotros" class="nav-link">NOSOTROS</a>
-                <a href="#comunidades" class="nav-link">COMUNIDADES</a>
-            </nav>
-
-            <!-- ACCIONES DERECHA -->
-            <div class="header-actions">
-                <a href="#cotizador" class="btn-cotizar-header">
-                    <span>🟧</span> COTIZAR AHORA
-                </a>
-                <a href="admin.html" class="btn-admin-login" title="Panel Administrador">
-                    <i class="fa-solid fa-lock"></i> Admin
-                </a>
-            </div>
-        </div>
-    </header>
-
-    <!-- ==================== 2. PÁGINA DE INICIO (HERO) ==================== -->
-    <section id="inicio" class="hero-section bg-dark text-white text-center section-padding" style="background: linear-gradient(135deg, #0B1B3D 0%, #0F2147 100%); padding: 120px 0;">
-        <div class="container" style="max-width: 900px;">
-            <div style="background: rgba(255, 107, 0, 0.2); color: var(--accent-orange); border: 1px solid var(--accent-orange); display: inline-block; padding: 6px 16px; border-radius: 30px; font-size: 0.8rem; font-weight: 700; margin-bottom: 20px;">
-                LOGÍSTICA INTERNACIONAL & IMPORTACIONES
-            </div>
-            <h1 style="font-size: 3.2rem; font-weight: 800; margin-bottom: 10px;">DEL MUNDO A BOLIVIA</h1>
-            <h2 style="font-size: 1.4rem; font-weight: 700; color: #E2E8F0; margin-bottom: 20px;">GESTIONA TU CARGA. IMPORTA CON CONFIANZA.</h2>
-            <p style="font-size: 1.1rem; color: #94A3B8; margin-bottom: 25px;">
-                “Somos tu aliado estratégico en importación y logística internacional. Conectamos tu carga con nuevas oportunidades para tu negocio.”
-            </p>
-            <div style="background: rgba(255, 255, 255, 0.08); padding: 12px 20px; border-radius: 8px; display: inline-block; font-size: 0.9rem; color: #CBD5E1; margin-bottom: 35px;">
-                Importación • Consolidación • LCL • FCL • Transporte Marítimo • Aéreo • Terrestre
-            </div>
-            <div style="display: flex; justify-content: center; gap: 20px; flex-wrap: wrap; margin-bottom: 30px;">
-                <a href="#cotizador" class="btn-cotizar-header" style="padding: 14px 28px; font-size: 1rem;"><span>🟧</span> COTIZAR AHORA</a>
-                <a href="#servicios" class="btn-admin-login" style="padding: 14px 28px; font-size: 1rem; background: rgba(255,255,255,0.1);">VER NUESTROS SERVICIOS <i class="fa-solid fa-arrow-right"></i></a>
-            </div>
-            <div style="font-style: italic; color: var(--accent-orange); font-weight: 600;">
-                <i class="fa-solid fa-quote-left"></i> “Cada carga es un paso más hacia tu crecimiento.”
-            </div>
-        </div>
-    </section>
-
-    <!-- ==================== 3. SERVICIOS ==================== -->
-    <section id="servicios" class="section-padding bg-light">
-        <div class="container">
-            <div class="section-header text-center">
-                <span class="subheading">NUESTROS SERVICIOS</span>
-                <h2 class="section-title">SOLUCIONES INTEGRALES</h2>
-                <div class="title-bar"></div>
-            </div>
-
-            <div class="catalog-grid">
-                <div class="product-card" style="padding: 25px;">
-                    <div style="font-size: 2.5rem; margin-bottom: 15px;">📦</div>
-                    <h3 style="font-size: 1.1rem; color: var(--primary-blue); margin-bottom: 10px;">CONSOLIDACIÓN DE CARGA — LCL / CBM</h3>
-                    <p style="font-size: 0.9rem; color: var(--text-light); margin-bottom: 20px;">Consolidación de mercancías provenientes de diferentes puntos de origen hacia Bolivia.</p>
-                    <a href="#cotizador" onclick="switchForm('lcl')" style="color: var(--accent-orange); font-weight: 700; font-size: 0.88rem;">Cotizar LCL <i class="fa-solid fa-chevron-right"></i></a>
-                </div>
-
-                <div class="product-card" style="padding: 25px;">
-                    <div style="font-size: 2.5rem; margin-bottom: 15px;">🚢</div>
-                    <h3 style="font-size: 1.1rem; color: var(--primary-blue); margin-bottom: 10px;">CONTENEDORES COMPLETOS — FCL</h3>
-                    <p style="font-size: 0.9rem; color: var(--text-light); margin-bottom: 20px;">Gestión de contenedores completos de diferentes tipos y tamaños.</p>
-                    <a href="#cotizador" onclick="switchForm('fcl')" style="color: var(--accent-orange); font-weight: 700; font-size: 0.88rem;">Cotizar FCL <i class="fa-solid fa-chevron-right"></i></a>
-                </div>
-
-                <div class="product-card" style="padding: 25px;">
-                    <div style="font-size: 2.5rem; margin-bottom: 15px;">🌊</div>
-                    <h3 style="font-size: 1.1rem; color: var(--primary-blue); margin-bottom: 10px;">TRANSPORTE MARÍTIMO</h3>
-                    <p style="font-size: 0.9rem; color: var(--text-light); margin-bottom: 20px;">Coordinación de transporte marítimo internacional con distintas navieras.</p>
-                    <a href="#cotizador" onclick="switchForm('maritimo')" style="color: var(--accent-orange); font-weight: 700; font-size: 0.88rem;">Cotizar Marítimo <i class="fa-solid fa-chevron-right"></i></a>
-                </div>
-
-                <div class="product-card" style="padding: 25px;">
-                    <div style="font-size: 2.5rem; margin-bottom: 15px;">✈️</div>
-                    <h3 style="font-size: 1.1rem; color: var(--primary-blue); margin-bottom: 10px;">FLETE AÉREO</h3>
-                    <p style="font-size: 0.9rem; color: var(--text-light); margin-bottom: 20px;">Soluciones rápidas para mercancías urgentes que requieren vía aérea.</p>
-                    <a href="#cotizador" onclick="switchForm('aereo')" style="color: var(--accent-orange); font-weight: 700; font-size: 0.88rem;">Cotizar Aéreo <i class="fa-solid fa-chevron-right"></i></a>
-                </div>
-
-                <div class="product-card" style="padding: 25px;">
-                    <div style="font-size: 2.5rem; margin-bottom: 15px;">🚛</div>
-                    <h3 style="font-size: 1.1rem; color: var(--primary-blue); margin-bottom: 10px;">FLETE TERRESTRE</h3>
-                    <p style="font-size: 0.9rem; color: var(--text-light); margin-bottom: 20px;">Transporte terrestre principalmente desde puertos de Chile hacia Bolivia.</p>
-                    <a href="#cotizador" onclick="switchForm('terrestre')" style="color: var(--accent-orange); font-weight: 700; font-size: 0.88rem;">Cotizar Terrestre <i class="fa-solid fa-chevron-right"></i></a>
-                </div>
-
-                <div class="product-card" style="padding: 25px;">
-                    <div style="font-size: 2.5rem; margin-bottom: 15px;">📑</div>
-                    <h3 style="font-size: 1.1rem; color: var(--primary-blue); margin-bottom: 10px;">GESTIÓN DOCUMENTAL</h3>
-                    <p style="font-size: 0.9rem; color: var(--text-light); margin-bottom: 20px;">Coordinación de documentos clave para importación y exportación.</p>
-                    <a href="#cotizador" onclick="switchForm('documental')" style="color: var(--accent-orange); font-weight: 700; font-size: 0.88rem;">Solicitar Gestión <i class="fa-solid fa-chevron-right"></i></a>
-                </div>
-
-                <div class="product-card" style="padding: 25px;">
-                    <div style="font-size: 2.5rem; margin-bottom: 15px;">🔎</div>
-                    <h3 style="font-size: 1.1rem; color: var(--primary-blue); margin-bottom: 10px;">VERIFICACIÓN DE PROVEEDORES</h3>
-                    <p style="font-size: 0.9rem; color: var(--text-light); margin-bottom: 20px;">Apoyo en la validación de proveedores en origen antes de realizar pagos.</p>
-                    <a href="#cotizador" onclick="switchForm('asesoria')" style="color: var(--accent-orange); font-weight: 700; font-size: 0.88rem;">Verificar Proveedor <i class="fa-solid fa-chevron-right"></i></a>
-                </div>
-
-                <div class="product-card" style="padding: 25px;">
-                    <div style="font-size: 2.5rem; margin-bottom: 15px;">🤝</div>
-                    <h3 style="font-size: 1.1rem; color: var(--primary-blue); margin-bottom: 10px;">ASESORÍA PERSONALIZADA</h3>
-                    <p style="font-size: 0.9rem; color: var(--text-light); margin-bottom: 20px;">Orientación para emprendedores y empresas que desean comenzar a importar.</p>
-                    <a href="#cotizador" onclick="switchForm('asesoria')" style="color: var(--accent-orange); font-weight: 700; font-size: 0.88rem;">Solicitar Asesoría <i class="fa-solid fa-chevron-right"></i></a>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- ==================== 4. RUTAS Y ORÍGENES ==================== -->
-    <section class="section-padding bg-dark text-white text-center">
-        <div class="container">
-            <span class="subheading text-orange">CONECTAMOS EL MUNDO CON BOLIVIA</span>
-            <h2 style="font-size: 2rem; margin: 10px 0;">RUTAS LOGÍSTICAS INTERNACIONALES</h2>
-            <div class="title-bar bg-orange" style="background:var(--accent-orange);"></div>
-            <p style="color: #94A3B8; max-width: 700px; margin: 15px auto 40px;">
-                “Gestionamos operaciones logísticas desde diferentes puntos del mundo hacia Bolivia, adaptándonos al origen, tipo de carga y necesidades de cada cliente.”
-            </p>
-            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px;">
-                <div style="background: rgba(255,255,255,0.05); padding: 25px; border-radius: 10px;"><span style="font-size: 2rem;">🇨🇳</span><h3>China</h3></div>
-                <div style="background: rgba(255,255,255,0.05); padding: 25px; border-radius: 10px;"><span style="font-size: 2rem;">🇺🇸</span><h3>Estados Unidos</h3></div>
-                <div style="background: rgba(255,255,255,0.05); padding: 25px; border-radius: 10px;"><span style="font-size: 2rem;">🇨🇱</span><h3>ZOFRI - Iquique</h3></div>
-                <div style="background: rgba(255,255,255,0.05); padding: 25px; border-radius: 10px;"><span style="font-size: 2rem;">🇪🇺</span><h3>Europa</h3></div>
-                <div style="background: rgba(255,255,255,0.05); padding: 25px; border-radius: 10px;"><span style="font-size: 2rem;">🌎</span><h3>Otros Orígenes</h3></div>
-            </div>
-        </div>
-    </section>
-
-    <!-- ==================== 6. NOSOTROS ==================== -->
-    <section id="nosotros" class="section-padding bg-white">
-        <div class="container" style="max-width: 900px;">
-            <div class="section-header text-center">
-                <span class="subheading">SOBRE CF GLOBAL CARGO</span>
-                <h2 class="section-title">MISIÓN, VISIÓN Y OBJETIVO</h2>
-                <div class="title-bar"></div>
-            </div>
-            <p style="color: var(--text-light); text-align: center; margin-bottom: 40px; font-size: 1rem;">
-                “CF GLOBAL CARGO IMPORT & LOGISTICS es una empresa dedicada a brindar soluciones integrales de importación y logística internacional, conectando proveedores, cargas y oportunidades comerciales con Bolivia.”
-            </p>
-            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 25px;">
-                <div style="background: var(--bg-light); padding: 30px; border-radius: 12px; border-top: 4px solid var(--accent-orange);">
-                    <h3>MISIÓN</h3>
-                    <p style="font-size: 0.88rem; color: var(--text-light); margin-top: 10px;">Brindar soluciones integrales de importación y logística internacional que permitan a emprendedores y empresas gestionar operaciones seguras, eficientes y rentables.</p>
-                </div>
-                <div style="background: var(--bg-light); padding: 30px; border-radius: 12px; border-top: 4px solid var(--accent-orange);">
-                    <h3>VISIÓN</h3>
-                    <p style="font-size: 0.88rem; color: var(--text-light); margin-top: 10px;">Ser una empresa reconocida en Bolivia por brindar soluciones confiables, destacándonos por precisión operativa y optimización de costos.</p>
-                </div>
-                <div style="background: var(--bg-light); padding: 30px; border-radius: 12px; border-top: 4px solid var(--accent-orange);">
-                    <h3>OBJETIVO</h3>
-                    <p style="font-size: 0.88rem; color: var(--text-light); margin-top: 10px;">Consolidarnos como un socio logístico estratégico para los importadores bolivianos mediante consolidación LCL/FCL y asesoramiento en costos.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- ==================== 7. CATÁLOGO ==================== -->
-    <section id="catalogo" class="section-padding bg-light">
-        <div class="container">
-            <div class="section-header text-center">
-                <span class="subheading">ACTIVIDAD IMPORTADORA</span>
-                <h2 class="section-title">CATÁLOGO DE PRODUCTOS DE IMPORTACIÓN</h2>
-                <div class="title-bar"></div>
-            </div>
-
-            <div class="catalog-tabs">
-                <button class="catalog-tab-btn active" onclick="filterCatalog('china')">🇨🇳 PRODUCTOS DESDE CHINA</button>
-                <button class="catalog-tab-btn" onclick="filterCatalog('zofri')">🇨🇱 PRODUCTOS DESDE ZOFRI — IQUIQUE</button>
-            </div>
-
-            <div class="catalog-grid" id="publicCatalogGrid">
-                <!-- Se llena dinámicamente desde Firestore -->
-            </div>
-        </div>
-    </section>
-
-    <!-- ==================== 8 AL 16. COTIZADOR DINÁMICO (8 FORMULARIOS COMPLETOS) ==================== -->
-    <section id="cotizador" class="section-padding bg-white">
-        <div class="container">
-            <div class="section-header text-center">
-                <span class="subheading">COTIZADOR EN LÍNEA</span>
-                <h2>¿QUÉ SERVICIO NECESITAS?</h2>
-                <div class="title-bar"></div>
-            </div>
-
-            <!-- Selector de 8 Servicios -->
-            <div class="service-selector-grid">
-                <button class="selector-btn active" onclick="switchForm('lcl')"><span class="icon">📦</span><span class="label">LCL China</span></button>
-                <button class="selector-btn" onclick="switchForm('zofri')"><span class="icon">📦</span><span class="label">Caja ZOFRI</span></button>
-                <button class="selector-btn" onclick="switchForm('fcl')"><span class="icon">🚢</span><span class="label">Contenedor FCL</span></button>
-                <button class="selector-btn" onclick="switchForm('maritimo')"><span class="icon">🌊</span><span class="label">Marítimo</span></button>
-                <button class="selector-btn" onclick="switchForm('aereo')"><span class="icon">✈️</span><span class="label">Flete Aéreo</span></button>
-                <button class="selector-btn" onclick="switchForm('terrestre')"><span class="icon">🚛</span><span class="label">Terrestre</span></button>
-                <button class="selector-btn" onclick="switchForm('documental')"><span class="icon">📑</span><span class="label">Documental</span></button>
-                <button class="selector-btn" onclick="switchForm('asesoria')"><span class="icon">🤝</span><span class="label">Asesoría</span></button>
-            </div>
-
-            <div class="form-container-box">
-                <!-- 1. FORMULARIO LCL -->
-                <form id="form-lcl" class="quote-form active-form" onsubmit="handleQuoteSubmit(event, 'lcl')">
-                    <h3>COTIZA TU CARGA CONSOLIDADA DESDE CHINA 🇨🇳</h3>
-                    <div class="form-grid" style="margin-top:20px;">
-                        <div class="form-group col-6">
-                            <label>Almacén / Ciudad de Origen *</label>
-                            <select id="lcl-origen" required>
-                                <option value="Yiwu ⭐">⭐ Yiwu</option>
-                                <option value="Guangzhou">Guangzhou</option>
-                                <option value="Foshan">Foshan</option>
-                                <option value="Qingdao">Qingdao</option>
-                                <option value="Shanghai">Shanghai</option>
-                                <option value="Shenzhen">Shenzhen</option>
-                                <option value="Otro">Otro</option>
-                            </select>
-                        </div>
-                        <div class="form-group col-6"><label>Mercancía / Producto *</label><input type="text" id="lcl-mercancia" required placeholder="Ej. Bicicletas eléctricas"></div>
-                        <div class="form-group col-4"><label>Metros Cúbicos (CBM) *</label><input type="number" step="0.01" id="lcl-cbm" required placeholder="8"></div>
-                        <div class="form-group col-4"><label>Peso Aprox. (kg) *</label><input type="number" id="lcl-peso" required placeholder="1500"></div>
-                        <div class="form-group col-4"><label>Cantidad Cajas *</label><input type="number" id="lcl-bultos" required placeholder="50"></div>
-                        <div class="form-group col-6"><label>Departamento Destino *</label>
-                            <select id="lcl-destino" required>
-                                <option value="La Paz">La Paz</option><option value="Oruro">Oruro</option><option value="Cochabamba">Cochabamba</option><option value="Santa Cruz">Santa Cruz</option><option value="Potosí">Potosí</option><option value="Tarija">Tarija</option>
-                            </select>
-                        </div>
-                        <div class="form-group col-6"><label>Nombre Completo *</label><input type="text" id="lcl-nombre" required placeholder="Tu nombre"></div>
-                        <div class="form-group col-6"><label>WhatsApp *</label><input type="tel" id="lcl-whatsapp" required placeholder="71234567"></div>
-                        <div class="form-group col-6"><label>Correo Electrónico (opcional)</label><input type="email" id="lcl-correo" placeholder="correo@ejemplo.com"></div>
-                    </div>
-                    <button type="submit" class="btn-submit-quote">SOLICITAR COTIZACIÓN LCL</button>
-                </form>
-
-                <!-- 2. FORMULARIO ZOFRI (CON CALCULADORA CBM) -->
-                <form id="form-zofri" class="quote-form" onsubmit="handleQuoteSubmit(event, 'zofri')">
-                    <h3>CARGA POR CAJA DESDE IQUIQUE — ZOFRI 🇨🇱</h3>
-                    <div class="form-grid" style="margin-top:20px;">
-                        <div class="form-group col-6"><label>Mercancía *</label><input type="text" id="zofri-mercancia" required placeholder="Ej. Calzados"></div>
-                        <div class="form-group col-6"><label>Cantidad de Cajas *</label><input type="number" id="zofri-cajas" required placeholder="10" oninput="calcularCbmZofri()"></div>
-                        <div class="form-group col-4"><label>Largo (cm) *</label><input type="number" id="zofri-largo" required placeholder="60" oninput="calcularCbmZofri()"></div>
-                        <div class="form-group col-4"><label>Ancho (cm) *</label><input type="number" id="zofri-ancho" required placeholder="40" oninput="calcularCbmZofri()"></div>
-                        <div class="form-group col-4"><label>Alto (cm) *</label><input type="number" id="zofri-alto" required placeholder="50" oninput="calcularCbmZofri()"></div>
-                        <div class="form-group col-12" style="background:rgba(255,107,0,0.08); padding:15px; border-radius:8px; border:1px dashed var(--accent-orange);">
-                            <strong>CBM APROXIMADO:</strong> <span id="zofri-cbm-val" style="color:var(--accent-orange); font-size:1.2rem;">0.000 CBM</span>
-                        </div>
-                        <div class="form-group col-6"><label>Peso por caja (kg) *</label><input type="number" id="zofri-peso-caja" required placeholder="15" oninput="calcularCbmZofri()"></div>
-                        <div class="form-group col-6"><label>Peso Total (kg)</label><input type="text" id="zofri-peso-total" readonly class="input-readonly"></div>
-                        <div class="form-group col-6"><label>Departamento Destino *</label><select id="zofri-destino"><option value="Oruro">Oruro</option><option value="La Paz">La Paz</option><option value="Cochabamba">Cochabamba</option><option value="Santa Cruz">Santa Cruz</option></select></div>
-                        <div class="form-group col-6"><label>Nombre *</label><input type="text" id="zofri-nombre" required></div>
-                        <div class="form-group col-6"><label>WhatsApp *</label><input type="tel" id="zofri-whatsapp" required></div>
-                        <div class="form-group col-6"><label>Correo (opcional)</label><input type="email" id="zofri-correo"></div>
-                    </div>
-                    <button type="submit" class="btn-submit-quote">SOLICITAR COTIZACIÓN DESDE IQUIQUE</button>
-                </form>
-
-                <!-- 3. FORMULARIO FCL -->
-                <form id="form-fcl" class="quote-form" onsubmit="handleQuoteSubmit(event, 'fcl')">
-                    <h3>COTIZA TU CONTENEDOR COMPLETO (FCL) 🚢</h3>
-                    <div class="form-grid" style="margin-top:20px;">
-                        <div class="form-group col-6"><label>País de Origen *</label>
-                            <select id="fcl-pais" required>
-                                <option value="China">China 🇨🇳</option><option value="Estados Unidos">Estados Unidos 🇺🇸</option><option value="Europa">Europa 🇪🇺</option><option value="Otro">Otro</option>
-                            </select>
-                        </div>
-                        <div class="form-group col-6"><label>Puerto de Salida *</label><input type="text" id="fcl-puerto-select" required placeholder="Ej. Shanghai, Los Angeles"></div>
-                        <div class="form-group col-4"><label>Tipo de Contenedor *</label>
-                            <select id="fcl-tipo-contenedor" required>
-                                <option value="40HQ">40HQ</option><option value="20GP">20GP</option><option value="40GP">40GP</option><option value="Otro">Otro</option>
-                            </select>
-                        </div>
-                        <div class="form-group col-4"><label>Cantidad de Contenedores *</label><input type="number" id="fcl-cantidad" required value="1"></div>
-                        <div class="form-group col-4"><label>Tránsito *</label><select id="fcl-transito"><option value="Iquique, Chile 🇨🇱">Iquique, Chile 🇨🇱</option><option value="Arica, Chile 🇨🇱">Arica, Chile 🇨🇱</option></select></div>
-                        <div class="form-group col-6"><label>Mercancía / Descripción *</label><input type="text" id="fcl-mercancia" required placeholder="Ej. Maquinaria pesada"></div>
-                        <div class="form-group col-6"><label>Peso Aprox. (kg) *</label><input type="number" id="fcl-peso" required placeholder="18000"></div>
-                        <div class="form-group col-6"><label>Destino en Bolivia *</label><select id="fcl-destino"><option value="La Paz">La Paz</option><option value="Santa Cruz">Santa Cruz</option><option value="Cochabamba">Cochabamba</option><option value="Oruro">Oruro</option></select></div>
-                        <div class="form-group col-6"><label>Nombre Completo *</label><input type="text" id="fcl-nombre" required></div>
-                        <div class="form-group col-6"><label>WhatsApp *</label><input type="tel" id="fcl-whatsapp" required></div>
-                    </div>
-                    <button type="submit" class="btn-submit-quote">SOLICITAR COTIZACIÓN FCL</button>
-                </form>
-
-                <!-- 4. TRANSPORTE MARÍTIMO -->
-                <form id="form-maritimo" class="quote-form" onsubmit="handleQuoteSubmit(event, 'maritimo')">
-                    <h3>COTIZA TU TRANSPORTE MARÍTIMO 🌊</h3>
-                    <div class="form-grid" style="margin-top:20px;">
-                        <div class="form-group col-6"><label>País Origen *</label><input type="text" id="mar-pais" required placeholder="China, EE.UU., Europa"></div>
-                        <div class="form-group col-6"><label>Puerto de Salida *</label><input type="text" id="mar-puerto" required placeholder="Ningbo, Miami..."></div>
-                        <div class="form-group col-6"><label>Naviera Preferida *</label>
-                            <select id="mar-naviera">
-                                <option value="No tengo preferencia">No tengo preferencia</option>
-                                <option value="MSC">MSC</option><option value="COSCO">COSCO</option><option value="Maersk">Maersk</option><option value="ONE">ONE</option>
-                            </select>
-                            <small style="color:var(--text-light); font-size:0.75rem;">“Sujeta a disponibilidad, ruta y condiciones de operación.”</small>
-                        </div>
-                        <div class="form-group col-6"><label>Tipo de Equipo *</label><select id="mar-equipo"><option value="40HQ">40HQ</option><option value="20GP">20GP</option><option value="Flat Rack">Flat Rack</option></select></div>
-                        <div class="form-group col-6"><label>Mercancía *</label><input type="text" id="mar-mercancia" required></div>
-                        <div class="form-group col-6"><label>Peso Aprox. (kg) *</label><input type="number" id="mar-peso" required></div>
-                        <div class="form-group col-6"><label>Destino en Bolivia *</label><select id="mar-destino"><option value="La Paz">La Paz</option><option value="Santa Cruz">Santa Cruz</option><option value="Cochabamba">Cochabamba</option></select></div>
-                        <div class="form-group col-6"><label>Nombre *</label><input type="text" id="mar-nombre" required></div>
-                        <div class="form-group col-6"><label>WhatsApp *</label><input type="tel" id="mar-whatsapp" required></div>
-                    </div>
-                    <button type="submit" class="btn-submit-quote">SOLICITAR COTIZACIÓN MARÍTIMA</button>
-                </form>
-
-                <!-- 5. FLETE AÉREO -->
-                <form id="form-aereo" class="quote-form" onsubmit="handleQuoteSubmit(event, 'aereo')">
-                    <h3>COTIZA TU FLETE AÉREO ✈️</h3>
-                    <div class="form-grid" style="margin-top:20px;">
-                        <div class="form-group col-6"><label>País / Ciudad de Origen *</label><input type="text" id="aereo-origen" required placeholder="Ej. Miami, Shenzhen"></div>
-                        <div class="form-group col-6"><label>Mercancía *</label><input type="text" id="aereo-mercancia" required></div>
-                        <div class="form-group col-4"><label>Peso (kg) *</label><input type="number" id="aereo-peso" required></div>
-                        <div class="form-group col-4"><label>Volumen / Dimensiones *</label><input type="text" id="aereo-volumen" required placeholder="Ej. 0.5 CBM"></div>
-                        <div class="form-group col-4"><label>Cantidad Bultos *</label><input type="number" id="aereo-bultos" required value="1"></div>
-                        <div class="form-group col-6"><label>Destino Bolivia *</label><select id="aereo-destino"><option value="La Paz (LPB)">La Paz (LPB)</option><option value="Santa Cruz (VVI)">Santa Cruz (VVI)</option><option value="Cochabamba (CBB)">Cochabamba (CBB)</option></select></div>
-                        <div class="form-group col-6"><label>Nombre *</label><input type="text" id="aereo-nombre" required></div>
-                        <div class="form-group col-6"><label>WhatsApp *</label><input type="tel" id="aereo-whatsapp" required></div>
-                    </div>
-                    <button type="submit" class="btn-submit-quote">SOLICITAR COTIZACIÓN AÉREA</button>
-                </form>
-
-                <!-- 6. FLETE TERRESTRE -->
-                <form id="form-terrestre" class="quote-form" onsubmit="handleQuoteSubmit(event, 'terrestre')">
-                    <h3>COTIZA TU FLETE TERRESTRE 🚛</h3>
-                    <div class="form-grid" style="margin-top:20px;">
-                        <div class="form-group col-6"><label>Puerto de Carga *</label><select id="terr-puerto"><option value="Iquique 🇨🇱">Iquique 🇨🇱</option><option value="Arica 🇨🇱">Arica 🇨🇱</option></select></div>
-                        <div class="form-group col-6"><label>Tipo de Despacho *</label><select id="terr-despacho"><option value="General">Despacho general</option><option value="Abreviado">Despacho abreviado</option><option value="Anticipado">Despacho anticipado</option></select></div>
-                        <div class="form-group col-6"><label>Mercancía *</label><input type="text" id="terr-mercancia" required></div>
-                        <div class="form-group col-6"><label>Peso (kg) *</label><input type="number" id="terr-peso" required></div>
-                        <div class="form-group col-6"><label>Aduana de Destino *</label><select id="terr-destino"><option value="La Paz">Aduana Interior La Paz</option><option value="Oruro">Aduana Interior Oruro</option><option value="Santa Cruz">Aduana Interior Santa Cruz</option></select></div>
-                        <div class="form-group col-6"><label>Nombre *</label><input type="text" id="terr-nombre" required></div>
-                        <div class="form-group col-6"><label>WhatsApp *</label><input type="tel" id="terr-whatsapp" required></div>
-                    </div>
-                    <button type="submit" class="btn-submit-quote">SOLICITAR COTIZACIÓN TERRESTRE</button>
-                </form>
-
-                <!-- 7. GESTIÓN DOCUMENTAL -->
-                <form id="form-documental" class="quote-form" onsubmit="handleQuoteSubmit(event, 'documental')">
-                    <h3>GESTIÓN DOCUMENTAL 📑</h3>
-                    <div class="form-grid" style="margin-top:20px;">
-                        <div class="form-group col-6"><label>País de Origen *</label><input type="text" id="doc-pais" required></div>
-                        <div class="form-group col-6"><label>Tipo de Mercancía *</label><input type="text" id="doc-mercancia" required></div>
-                        <div class="form-group col-12"><label>Servicio Requerido *</label>
-                            <select id="doc-servicio">
-                                <option value="Factura Comercial">Factura Comercial</option>
-                                <option value="Packing List">Lista de Empaque / Packing List</option>
-                                <option value="Exportación China">Documentación de exportación desde China</option>
-                                <option value="Agente en Origen">Coordinación documental con agente en origen</option>
-                            </select>
-                        </div>
-                        <div class="form-group col-12"><label>Mensaje / Observaciones *</label><textarea id="doc-mensaje" rows="2" required></textarea></div>
-                        <div class="form-group col-6"><label>Nombre *</label><input type="text" id="doc-nombre" required></div>
-                        <div class="form-group col-6"><label>WhatsApp *</label><input type="tel" id="doc-whatsapp" required></div>
-                    </div>
-                    <button type="submit" class="btn-submit-quote">SOLICITAR GESTIÓN DOCUMENTAL</button>
-                </form>
-
-                <!-- 8. ASESORÍA PERSONALIZADA -->
-                <form id="form-asesoria" class="quote-form" onsubmit="handleQuoteSubmit(event, 'asesoria')">
-                    <h3>¿QUIERES EMPEZAR A IMPORTAR? 🤝</h3>
-                    <div class="form-grid" style="margin-top:20px;">
-                        <div class="form-group col-12"><label>¿En qué necesitas ayuda? *</label>
-                            <select id="ase-opcion">
-                                <option value="Quiero comenzar a importar">Quiero comenzar a importar</option>
-                                <option value="Importar un producto específico">Quiero importar un producto específico</option>
-                                <option value="Buscar proveedor">Necesito encontrar proveedor</option>
-                                <option value="Verificar proveedor">Necesito verificar proveedor</option>
-                                <option value="Costos de importación">Quiero conocer mis costos de importación</option>
-                            </select>
-                        </div>
-                        <div class="form-group col-6"><label>Producto de Interés</label><input type="text" id="ase-producto" placeholder="Ej. Scooters, Repuestos"></div>
-                        <div class="form-group col-6"><label>País Proveedor</label><input type="text" id="ase-pais-prov" placeholder="Ej. China"></div>
-                        <div class="form-group col-12"><label>Detalla tu consulta *</label><textarea id="ase-consulta" rows="2" required></textarea></div>
-                        <div class="form-group col-6"><label>Nombre *</label><input type="text" id="ase-nombre" required></div>
-                        <div class="form-group col-6"><label>WhatsApp *</label><input type="tel" id="ase-whatsapp" required></div>
-                    </div>
-                    <button type="submit" class="btn-submit-quote">SOLICITAR ASESORÍA</button>
-                </form>
-            </div>
-        </div>
-    </section>
-
-    <!-- ==================== 19 & 20. COMUNIDADES Y REDES ==================== -->
-    <section id="comunidades" class="section-padding bg-dark text-white text-center">
-        <div class="container">
-            <span class="subheading text-orange">APRENDE, IMPORTA Y CRECE</span>
-            <h2>ÚNETE A NUESTRAS COMUNIDADES DE WHATSAPP</h2>
-            <div class="title-bar bg-orange"></div>
-            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px; margin: 40px 0;">
-                <div style="background: rgba(255,255,255,0.05); padding: 30px; border-radius: 12px; text-align: left;">
-                    <span style="color:var(--accent-orange); font-weight:800;">🇨🇳 CHINA → BOLIVIA</span>
-                    <h3 style="margin: 10px 0;">Consolidación China</h3>
-                    <p style="color:#94A3B8; font-size:0.88rem; margin-bottom:20px;">Fechas de salidas, novedades de almacenes y consejos para importar.</p>
-                    <a href="https://chat.whatsapp.com/TU_ENLACE" target="_blank" class="btn-cotizar-header" style="width:100%; justify-content:center;">UNIRME AL GRUPO DE CHINA</a>
-                </div>
-                <div style="background: rgba(255,255,255,0.05); padding: 30px; border-radius: 12px; text-align: left;">
-                    <span style="color:var(--accent-orange); font-weight:800;">🇨🇱 ZOFRI IQUIQUE → BOLIVIA</span>
-                    <h3 style="margin: 10px 0;">Consolidación ZOFRI</h3>
-                    <p style="color:#94A3B8; font-size:0.88rem; margin-bottom:20px;">Oportunidades de productos, novedades de Zona Franca y salidas.</p>
-                    <a href="https://chat.whatsapp.com/TU_ENLACE_ZOFRI" target="_blank" class="btn-cotizar-header" style="width:100%; justify-content:center;">UNIRME AL GRUPO ZOFRI</a>
-                </div>
-            </div>
-
-            <div style="margin-top: 50px; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 30px;">
-                <h3>SÍGUENOS EN NUESTRAS REDES</h3>
-                <div style="display: flex; justify-content: center; gap: 15px; margin-top: 15px;">
-                    <a href="#" class="social-btn" style="background:rgba(255,255,255,0.1); width:45px; height:45px; border-radius:50%; display:flex; align-items:center; justify-content:center; color:#FFF;"><i class="fa-brands fa-tiktok"></i></a>
-                    <a href="#" class="social-btn" style="background:rgba(255,255,255,0.1); width:45px; height:45px; border-radius:50%; display:flex; align-items:center; justify-content:center; color:#FFF;"><i class="fa-brands fa-facebook-f"></i></a>
-                    <a href="#" class="social-btn" style="background:rgba(255,255,255,0.1); width:45px; height:45px; border-radius:50%; display:flex; align-items:center; justify-content:center; color:#FFF;"><i class="fa-brands fa-instagram"></i></a>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- FOOTER -->
-    <footer class="footer bg-dark text-white text-center" style="padding: 25px 0; border-top: 1px solid rgba(255,255,255,0.05); font-size:0.85rem;">
-        <p>&copy; 2026 CF GLOBAL CARGO IMPORT & LOGISTICS. Todos los derechos reservados.</p>
-    </footer>
-
-    <!-- MODAL WHATSAPP PREPARADO -->
-    <div id="whatsappSummaryModal" class="modal-backdrop" style="display:none;">
-        <div class="modal-card text-center">
-            <h3>✅ SOLICITUD PREPARADA</h3>
-            <p style="color:var(--text-light); font-size:0.88rem; margin: 10px 0;">Hemos recopilado la información de tu operación.</p>
-            <div id="summaryPreviewText" style="background:var(--bg-light); padding:15px; border-radius:8px; text-align:left; font-family:monospace; font-size:0.85rem; white-space:pre-wrap; margin:15px 0;"></div>
-            <a id="btnSendWhatsappFinal" href="#" target="_blank" class="btn-cotizar-header" style="background:#25D366; width:100%; justify-content:center;">
-                <i class="fa-brands fa-whatsapp"></i> 🟧 ENVIAR SOLICITUD POR WHATSAPP
-            </a>
-            <button onclick="closeWhatsappModal()" style="background:none; border:none; color:var(--text-light); margin-top:15px; cursor:pointer;">Cerrar</button>
-        </div>
+    <div class="header-actions">
+      <a class="button button-orange header-quote" href="#contacto"><span class="cube">⬡</span> COTIZAR AHORA</a>
+      <a class="button button-outline header-catalog" href="#catalogo"><span class="cart">🛒</span> CATÁLOGO</a>
     </div>
 
-    <script type="module" src="js/catalog.js"></script>
-    <script src="js/cotizador.js"></script>
+    <div class="socials" aria-label="Redes sociales">
+      <a class="social tiktok" href="#" aria-label="TikTok">
+        <svg class="social-icon tiktok-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+          <path class="tiktok-cyan" d="M16.4 3.2a5.4 5.4 0 0 0 4.2 4.6v3.4a8.8 8.8 0 0 1-4.2-1.1v6.1a6 6 0 1 1-6-6c.5 0 1 .1 1.5.2v3.6a2.6 2.6 0 1 0 1.2 2.2V3.2z"/>
+          <path class="tiktok-pink" d="M16.4 3.2a5.4 5.4 0 0 0 4.2 4.6v3.4a8.8 8.8 0 0 1-4.2-1.1v6.1a6 6 0 1 1-6-6c.5 0 1 .1 1.5.2v3.6a2.6 2.6 0 1 0 1.2 2.2V3.2z"/>
+          <path class="tiktok-white" d="M16.4 3.2a5.4 5.4 0 0 0 4.2 4.6v3.4a8.8 8.8 0 0 1-4.2-1.1v6.1a6 6 0 1 1-6-6c.5 0 1 .1 1.5.2v3.6a2.6 2.6 0 1 0 1.2 2.2V3.2z"/>
+        </svg>
+      </a>
+      <a class="social facebook" href="#" aria-label="Facebook">
+        <svg class="social-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M13.5 21v-8h2.7l.4-3.1h-3.1v-2c0-.9.3-1.5 1.6-1.5h1.7V3.6c-.3 0-1.3-.1-2.5-.1-2.5 0-4.2 1.5-4.2 4.3v2.1H7.4V13h2.7v8z"/></svg>
+      </a>
+      <a class="social instagram" href="#" aria-label="Instagram">
+        <svg class="social-icon instagram-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect x="3.2" y="3.2" width="17.6" height="17.6" rx="5"/><circle cx="12" cy="12" r="4.1"/><circle class="instagram-dot" cx="17.8" cy="6.5" r="1.1"/></svg>
+      </a>
+      <a class="social whatsapp" href="#" aria-label="WhatsApp">
+        <svg class="social-icon whatsapp-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M20.2 11.7a8.2 8.2 0 0 1-12.1 7.2L3 20l1.2-4.9a8.2 8.2 0 1 1 16-3.4Z"/><path d="M8.2 7.7c.2-.5.4-.5.7-.5h.5c.2 0 .4 0 .5.4l.8 1.9c.1.2.1.4-.1.6l-.6.7c-.2.2-.2.4 0 .6.4.7 1 1.3 1.7 1.8.7.5 1.2.7 1.6.8.2.1.4 0 .5-.1l.8-.9c.2-.2.4-.2.6-.1l1.8.9c.3.1.4.3.3.6l-.3 1c-.2.5-.9.8-1.5.9-.5.1-1.2.1-2-.2-.6-.2-1.4-.6-2.3-1.3-1.4-1.1-2.3-2.5-2.6-3-.3-.5-.8-1.4-.8-2.3 0-.9.4-1.4.6-1.8Z"/></svg>
+      </a>
+    </div>
+    <button class="menu-toggle" id="menuToggle" aria-label="Abrir menú de opciones" aria-expanded="false" aria-controls="utilityMenu">
+      <span></span><span></span><span></span>
+    </button>
+    <div class="utility-menu" id="utilityMenu" hidden>
+      <a href="admin.html">Panel de administración <span aria-hidden="true">➜</span></a>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero" id="inicio">
+      <!-- FONDO: coloca tu imagen en assets/hero-bg.jpg. El degradado de CSS se superpone automáticamente. -->
+      <div class="hero-background" aria-hidden="true"></div>
+      <div class="hero-content">
+        <h1>DEL MUNDO A<br><span>BOLIVIA</span></h1>
+        <p class="hero-subtitle">Importa con confianza, <strong>crece sin límites</strong></p>
+        <div class="orange-rule"></div>
+        <div class="hero-buttons">
+          <a class="button button-orange button-large" href="#contacto"><span class="cube">⬡</span> COTIZAR AHORA <span class="arrow">➜</span></a>
+          <a class="button button-outline button-large" href="#catalogo"><span class="big-cart">🛒</span> VER CATÁLOGO <span class="arrow">➜</span></a>
+        </div>
+      </div>
+
+      <div class="origins-panel">
+        <h2>PRINCIPALES <span>ORÍGENES</span><i></i></h2>
+        <div class="origin-grid">
+          <article class="origin-card">
+            <div class="flag" role="img" aria-label="Bandera de China"><svg class="flag-art" viewBox="0 0 60 40" aria-hidden="true" focusable="false"><rect width="60" height="40" fill="#e31b23"/><path d="m12 5 1.4 4.2H18l-3.7 2.6 1.4 4.2-3.7-2.6-3.7 2.6 1.4-4.2L6 9.2h4.6z" fill="#ffdf00"/><circle cx="23" cy="7" r="1.5" fill="#ffdf00"/><circle cx="27" cy="12" r="1.5" fill="#ffdf00"/><circle cx="27" cy="19" r="1.5" fill="#ffdf00"/><circle cx="23" cy="24" r="1.5" fill="#ffdf00"/></svg></div><div><h3>CHINA</h3><p>Importa desde principales ciudades y puertos</p></div>
+          </article>
+          <article class="origin-card">
+            <div class="flag" role="img" aria-label="Bandera de Estados Unidos"><svg class="flag-art" viewBox="0 0 60 40" aria-hidden="true" focusable="false"><rect width="60" height="40" fill="#fff"/><path fill="#c92736" d="M0 0h60v3H0zm0 6h60v3H0zm0 6h60v3H0zm0 6h60v3H0zm0 6h60v3H0zm0 6h60v3H0zm0 6h60v2H0z"/><rect width="27" height="22" fill="#174078"/><g fill="#fff"><circle cx="4" cy="4" r="1"/><circle cx="10" cy="4" r="1"/><circle cx="16" cy="4" r="1"/><circle cx="22" cy="4" r="1"/><circle cx="7" cy="9" r="1"/><circle cx="13" cy="9" r="1"/><circle cx="19" cy="9" r="1"/><circle cx="4" cy="14" r="1"/><circle cx="10" cy="14" r="1"/><circle cx="16" cy="14" r="1"/><circle cx="22" cy="14" r="1"/><circle cx="7" cy="19" r="1"/><circle cx="13" cy="19" r="1"/><circle cx="19" cy="19" r="1"/></g></svg></div><div><h3>ESTADOS UNIDOS</h3><p>Diferentes puertos de origen</p></div>
+          </article>
+          <article class="origin-card">
+            <div class="flag" role="img" aria-label="Bandera de la Unión Europea"><svg class="flag-art" viewBox="0 0 60 40" aria-hidden="true" focusable="false"><rect width="60" height="40" fill="#124994"/><g fill="#ffdc28"><circle cx="30" cy="8" r="1.6"/><circle cx="36" cy="9.6" r="1.6"/><circle cx="40.4" cy="14" r="1.6"/><circle cx="42" cy="20" r="1.6"/><circle cx="40.4" cy="26" r="1.6"/><circle cx="36" cy="30.4" r="1.6"/><circle cx="30" cy="32" r="1.6"/><circle cx="24" cy="30.4" r="1.6"/><circle cx="19.6" cy="26" r="1.6"/><circle cx="18" cy="20" r="1.6"/><circle cx="19.6" cy="14" r="1.6"/><circle cx="24" cy="9.6" r="1.6"/></g></svg></div><div><h3>EUROPA</h3><p>Soluciones según tu operación</p></div>
+          </article>
+          <article class="origin-card">
+            <div class="flag" role="img" aria-label="Bandera de Chile"><svg class="flag-art" viewBox="0 0 60 40" aria-hidden="true" focusable="false"><rect width="60" height="20" fill="#fff"/><rect y="20" width="60" height="20" fill="#d52b3f"/><rect width="22" height="20" fill="#174078"/><path d="m11 3.3 1.8 5.2h5.4l-4.4 3.2 1.7 5.2-4.5-3.2-4.4 3.2 1.7-5.2-4.4-3.2h5.4z" fill="#fff"/></svg></div><div><h3>CHILE - ZOFRI</h3><p>Carga por caja y contenedores</p></div>
+          </article>
+          <article class="origin-card">
+            <div class="flag globe" role="img" aria-label="Otros orígenes"><svg class="globe-icon" viewBox="0 0 40 40" aria-hidden="true" focusable="false"><circle cx="20" cy="20" r="16"/><path d="M4 20h32M20 4c5 5 7 10 7 16s-2 11-7 16c-5-5-7-10-7-16s2-11 7-16ZM8 11h24M8 29h24"/></svg></div><div><h3>OTROS ORÍGENES</h3><p>Te asesoramos según tu necesidad</p></div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- Secciones de destino: reemplaza el contenido de ejemplo por el real. -->
+    <section class="below-section" id="servicios"><h2>Servicios</h2><p>Soluciones de importación y logística adaptadas a tu operación.</p></section>
+    <section class="below-section" id="catalogo"><h2>Catálogo</h2><p>Aquí puedes enlazar tu catálogo de productos.</p></section>
+    <section class="below-section" id="nosotros"><h2>Nosotros</h2><p>Conoce CF Global Cargo.</p></section>
+    <section class="below-section" id="comunidades"><h2>Comunidades</h2><p>Únete a nuestra comunidad.</p></section>
+    <section class="below-section" id="contacto"><h2>Cotiza tu importación</h2><p>Añade aquí tu formulario, WhatsApp o datos de contacto.</p></section>
+  </main>
+  <script src="js/script.js"></script>
 </body>
 </html>

@@ -1,0 +1,63 @@
+:root {
+  --primary-blue: #052653;
+  --accent-orange: #ff650c;
+  --white: #fff;
+  --text-dark: #1e293b;
+  --text-light: #64748b;
+  --bg-light: #f4f7fb;
+  --border-color: #dbe3ef;
+}
+
+* { box-sizing: border-box; }
+body { margin: 0; color: var(--text-dark); font-family: Inter, "Segoe UI", Arial, sans-serif; line-height: 1.5; }
+button, input, select, textarea { font: inherit; }
+.container { width: min(1200px, calc(100% - 40px)); margin: 0 auto; }
+.text-center { text-align: center; }
+.form-grid { display: flex; flex-wrap: wrap; gap: 18px; }
+.form-group { display: flex; flex-direction: column; min-width: 0; }
+.col-12 { flex: 1 1 100%; width: 100%; }
+.col-6 { flex: 1 1 calc(50% - 9px); width: calc(50% - 9px); }
+.col-4 { flex: 1 1 calc(33.333% - 12px); width: calc(33.333% - 12px); }
+.form-group label { margin-bottom: 6px; color: var(--primary-blue); font-size: .85rem; font-weight: 750; }
+.form-group input, .form-group select, .form-group textarea { min-width: 0; max-width: 100%; color: var(--text-dark); }
+.btn-cotizar-header {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 10px 16px;
+  border-radius: 7px;
+  color: var(--white);
+  background: var(--accent-orange);
+  font-size: .88rem;
+  font-weight: 800;
+  text-decoration: none;
+}
+.btn-cotizar-header:hover { filter: brightness(1.06); }
+#adminDashboard > header { flex-wrap: wrap; gap: 14px; }
+#adminDashboard > header h2 { margin: 0; }
+#adminDashboard > header > div { flex-wrap: wrap; }
+table { min-width: 680px; }
+th, td { vertical-align: middle; }
+input:focus-visible, select:focus-visible, textarea:focus-visible, button:focus-visible, a:focus-visible {
+  outline: 3px solid #ffb17c;
+  outline-offset: 3px;
+}
+
+@media (max-width: 720px) {
+  .container { width: calc(100% - 28px); max-width: 1200px; }
+  #adminDashboard > header { align-items: stretch !important; padding: 16px 18px !important; }
+  #adminDashboard > header > div { gap: 8px !important; }
+  #adminDashboard > header > div > a, #adminDashboard > header > div > button { flex: 1 1 auto; text-align: center; }
+  #adminDashboard main { padding: 26px 0 !important; }
+  #adminDashboard main > div { margin-bottom: 22px !important; padding: 22px 18px !important; }
+}
+
+@media (max-width: 560px) {
+  #loginSection { padding: 16px; }
+  #loginSection > div { padding: 24px 18px !important; }
+  #adminDashboard > header h2 { font-size: 1.05rem !important; }
+  .col-6, .col-4 { flex-basis: 100%; width: 100%; }
+  .form-grid { gap: 14px; }
+  #adminDashboard main > div > h3 { font-size: 1rem; }
+}
