@@ -6,25 +6,29 @@
     <title>Panel de Administración — CF Global Cargo</title>
     <link rel="stylesheet" href="css/admin.css">
 </head>
-<body style="background: var(--bg-light);">
+<body class="admin-page">
 
     <!-- ==================== LOGIN SECTION ==================== -->
-    <section id="loginSection" style="display: flex; justify-content: center; align-items: center; height: 100vh;">
-        <div style="background: var(--white); padding: 40px; border-radius: 16px; box-shadow: 0 10px 25px rgba(0,0,0,0.05); width: 100%; max-width: 400px; border: 1px solid var(--border-color);">
-            <div class="text-center" style="margin-bottom: 25px;">
-                <h2 style="color: var(--primary-blue); font-size: 1.5rem;">ACCESO ADMINISTRADOR</h2>
-                <p style="color: var(--text-light); font-size: 0.85rem;">CF Global Cargo — Gestión de Catálogo</p>
+    <section id="loginSection" class="login-shell">
+        <div class="login-card">
+            <div class="login-brand">
+                <img src="assets/logo.jpg" alt="CF Global Cargo" class="login-logo">
+            </div>
+            <div class="text-center login-heading">
+                <h1>ACCESO ADMINISTRADOR</h1>
+                <p>Gestión de catálogos</p>
             </div>
             <form id="loginForm">
-                <div class="form-group" style="margin-bottom: 15px;">
-                    <label style="font-size: 0.85rem; font-weight: 750;">Correo Electrónico</label>
-                    <input type="email" id="loginEmail" required placeholder="admin@cfglobalcargo.com" style="width:100%; padding:10px; border:1px solid var(--border-color); border-radius:6px;">
+                <div class="form-group login-field">
+                    <label for="loginEmail">Correo electrónico</label>
+                    <input type="email" id="loginEmail" required autocomplete="username" placeholder="admin@cfglobalcargo.com">
                 </div>
-                <div class="form-group" style="margin-bottom: 20px;">
-                    <label style="font-size: 0.85rem; font-weight: 750;">Contraseña</label>
-                    <input type="password" id="loginPassword" required placeholder="••••••••" style="width:100%; padding:10px; border:1px solid var(--border-color); border-radius:6px;">
+                <div class="form-group login-field">
+                    <label for="loginPassword">Contraseña</label>
+                    <input type="password" id="loginPassword" required autocomplete="current-password" placeholder="••••••••">
                 </div>
-                <button type="submit" class="btn-cotizar-header" style="width: 100%; justify-content: center; border:none; cursor:pointer;">INGRESAR AL PANEL</button>
+                <p class="login-error" id="loginError" role="alert" hidden></p>
+                <button type="submit" class="btn-cotizar-header login-submit">INGRESAR AL PANEL</button>
             </form>
         </div>
     </section>
@@ -47,53 +51,59 @@
         <main class="container" style="padding: 40px 20px;">
             <!-- Formulario para Agregar Producto -->
             <div style="background: var(--white); padding: 30px; border-radius: 12px; border: 1px solid var(--border-color); margin-bottom: 40px;">
-                <h3 style="color: var(--primary-blue); margin-bottom: 20px;">📦 Registrar Nuevo Producto en Catálogo</h3>
+                <h3 id="productFormTitle" style="color: var(--primary-blue); margin-bottom: 20px;">📦 Registrar Nuevo Producto en Catálogo</h3>
                 <form id="addProductForm" class="form-grid">
                     <div class="form-group col-6">
-                        <label>Categoría / Origen *</label>
+                        <label for="prod-categoria">Origen del producto *</label>
                         <select id="prod-categoria" required style="width:100%; padding:10px; border:1px solid var(--border-color); border-radius:6px;">
                             <option value="china">🇨🇳 Productos desde China</option>
                             <option value="zofri">🇨🇱 Productos desde ZOFRI - Iquique</option>
                         </select>
                     </div>
                     <div class="form-group col-6">
-                        <label>Nombre del Producto *</label>
+                        <label for="prod-subcategoria">Tipo de Producto / Categoría *</label>
+                        <input type="text" id="prod-subcategoria" required placeholder="Ej. Herramientas, Audio, Hogar" style="width:100%; padding:10px; border:1px solid var(--border-color); border-radius:6px;">
+                    </div>
+                    <div class="form-group col-6">
+                        <label for="prod-nombre">Nombre del Producto *</label>
                         <input type="text" id="prod-nombre" required placeholder="Ej. Bicicleta Eléctrica Plegable" style="width:100%; padding:10px; border:1px solid var(--border-color); border-radius:6px;">
                     </div>
                     <div class="form-group col-12">
-                        <label>Descripción Corta *</label>
+                        <label for="prod-desc">Descripción Corta *</label>
                         <textarea id="prod-desc" required rows="2" placeholder="Detalles clave del producto..." style="width:100%; padding:10px; border:1px solid var(--border-color); border-radius:6px;"></textarea>
                     </div>
                     <div class="form-group col-4">
-                        <label>Precio Unitario (USD) *</label>
+                        <label for="prod-precioUnitario">Precio Unitario (USD) *</label>
                         <input type="number" step="0.01" id="prod-precioUnitario" required placeholder="350" style="width:100%; padding:10px; border:1px solid var(--border-color); border-radius:6px;">
                     </div>
                     <div class="form-group col-4">
-                        <label>Precio por Caja (USD) *</label>
+                        <label for="prod-precioCaja">Precio por Caja (USD) *</label>
                         <input type="number" step="0.01" id="prod-precioCaja" required placeholder="3200" style="width:100%; padding:10px; border:1px solid var(--border-color); border-radius:6px;">
                     </div>
                     <div class="form-group col-4">
-                        <label>Unidades por Caja *</label>
+                        <label for="prod-unidadesCaja">Unidades por Caja *</label>
                         <input type="number" id="prod-unidadesCaja" required placeholder="10" style="width:100%; padding:10px; border:1px solid var(--border-color); border-radius:6px;">
                     </div>
                     <div class="form-group col-6">
-                        <label>Precio Puesto en Bolivia (Ej. $420 USD) *</label>
+                        <label for="prod-precioBolivia">Precio Puesto en Bolivia (Ej. $420 USD) *</label>
                         <input type="text" id="prod-precioBolivia" required placeholder="$420 USD puesto en La Paz/Oruro" style="width:100%; padding:10px; border:1px solid var(--border-color); border-radius:6px;">
                     </div>
                     <div class="form-group col-6">
-                        <label>Fotografía del Producto (Desde tu Dispositivo) *</label>
+                        <label for="prod-imagenFile">Fotografía del Producto (obligatoria al crear, opcional al editar)</label>
                         <input type="file" id="prod-imagenFile" accept="image/*" required style="width:100%; padding:8px; border:1px solid var(--border-color); border-radius:6px; background:var(--white);">
                     </div>
                     <div class="form-group col-6">
-                        <label>Disponibilidad *</label>
+                        <label for="prod-disponibilidad">Disponibilidad *</label>
                         <select id="prod-disponibilidad" style="width:100%; padding:10px; border:1px solid var(--border-color); border-radius:6px;">
                             <option value="disponible">Disponible</option>
                             <option value="proxima_llegada">Próxima Llegada</option>
                             <option value="agotado">Agotado</option>
                         </select>
                     </div>
-                    <div class="form-group col-12" style="margin-top: 10px;">
-                        <button type="submit" class="btn-cotizar-header" style="border:none; cursor:pointer;">GUARDAR Y PUBLICAR PRODUCTO</button>
+                    <div class="form-group col-12 admin-form-actions" style="margin-top: 10px;">
+                        <button type="submit" id="saveProductButton" class="btn-cotizar-header" style="border:none; cursor:pointer;">GUARDAR Y PUBLICAR PRODUCTO</button>
+                        <button type="button" id="cancelEditButton" class="btn-secondary" hidden>Cancelar edición</button>
+                        <p id="productFormStatus" class="product-form-status" role="status" aria-live="polite"></p>
                     </div>
                 </form>
             </div>
@@ -110,7 +120,7 @@
                                 <th style="padding: 10px;">Categoría</th>
                                 <th style="padding: 10px;">Precio Unit.</th>
                                 <th style="padding: 10px;">Precio Bolivia</th>
-                                <th style="padding: 10px;">Acción</th>
+                                <th style="padding: 10px;">Acciones</th>
                             </tr>
                         </thead>
                         <tbody id="adminTableBody">

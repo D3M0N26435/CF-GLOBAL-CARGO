@@ -29,7 +29,6 @@ if (menuToggle && utilityMenu) {
     }
   });
 }
-
 const originDetails = {
   CHINA: {
     name: "China",
@@ -159,32 +158,3 @@ if (originDialog) {
     link.addEventListener("click", () => originDialog.close());
   });
 }
-
-const catalogTabs = Array.from(document.querySelectorAll('.catalog-tabs [role="tab"]'));
-
-const selectCatalogTab = (selectedTab, moveFocus = false) => {
-  catalogTabs.forEach((tab) => {
-    const selected = tab === selectedTab;
-    const panel = document.getElementById(tab.getAttribute("aria-controls"));
-    tab.setAttribute("aria-selected", String(selected));
-    tab.tabIndex = selected ? 0 : -1;
-    if (panel) panel.hidden = !selected;
-  });
-
-  if (moveFocus) selectedTab.focus();
-};
-
-catalogTabs.forEach((tab, index) => {
-  tab.addEventListener("click", () => selectCatalogTab(tab));
-  tab.addEventListener("keydown", (event) => {
-    let nextIndex = index;
-    if (event.key === "ArrowRight") nextIndex = (index + 1) % catalogTabs.length;
-    else if (event.key === "ArrowLeft") nextIndex = (index - 1 + catalogTabs.length) % catalogTabs.length;
-    else if (event.key === "Home") nextIndex = 0;
-    else if (event.key === "End") nextIndex = catalogTabs.length - 1;
-    else return;
-
-    event.preventDefault();
-    selectCatalogTab(catalogTabs[nextIndex], true);
-  });
-});

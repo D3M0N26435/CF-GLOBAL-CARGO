@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#052653">
+  <title>Catálogo China | CF Global Cargo</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="css/catalog.css">
+</head>
+<body class="catalog-page" data-catalog-origin="china">
+  <header class="catalog-header">
+    <a href="index.html#inicio" class="catalog-brand" aria-label="CF Global Cargo, inicio">
+      <img src="assets/logo.jpg" alt="CF Global Cargo" class="catalog-brand-logo">
+    </a>
+    <a class="button button-outline catalog-back" href="index.html#catalogo">← Volver a catálogos</a>
+  </header>
+
+  <main>
+    <section class="catalog-hero catalog-hero-china" aria-labelledby="catalogPageTitle">
+      <p class="catalog-route">CHINA → BOLIVIA</p>
+      <h1 id="catalogPageTitle">CATÁLOGO CHINA</h1>
+      <p>Explora productos, compara opciones y encuentra alternativas para tu próxima importación.</p>
+    </section>
+
+    <section class="catalog-browser" aria-label="Productos de China">
+      <div class="catalog-toolbar">
+        <label class="catalog-search-field" for="productSearch">
+          <span>Buscar productos</span>
+          <input id="productSearch" type="search" placeholder="Ej. herramientas, audífonos..." autocomplete="off">
+        </label>
+        <label class="catalog-filter-field" for="productCategory">
+          <span>Tipo de producto</span>
+          <select id="productCategory"><option value="">Todas las categorías</option></select>
+        </label>
+        <label class="catalog-filter-field" for="productAvailability">
+          <span>Disponibilidad</span>
+          <select id="productAvailability">
+            <option value="">Cualquier estado</option>
+            <option value="disponible">Disponible</option>
+            <option value="proxima_llegada">Próxima llegada</option>
+            <option value="agotado">Agotado</option>
+          </select>
+        </label>
+        <label class="catalog-filter-field" for="productSort">
+          <span>Ordenar por</span>
+          <select id="productSort">
+            <option value="recent">Más recientes</option>
+            <option value="name">Nombre A–Z</option>
+            <option value="price">Precio menor</option>
+          </select>
+        </label>
+      </div>
+      <p class="catalog-results" id="catalogStatus" role="status" aria-live="polite">Cargando productos...</p>
+      <div class="product-grid" id="productGrid"></div>
+    </section>
+  </main>
+
+  <footer class="catalog-footer"><a href="index.html#contacto">¿Necesitas asesoramiento? Contáctanos</a></footer>
+  <script type="module" src="js/catalogo.js"></script>
+</body>
+</html>

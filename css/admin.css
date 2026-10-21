@@ -10,6 +10,7 @@
 
 * { box-sizing: border-box; }
 body { margin: 0; color: var(--text-dark); font-family: Inter, "Segoe UI", Arial, sans-serif; line-height: 1.5; }
+body.admin-page { min-height: 100vh; background: var(--bg-light); }
 button, input, select, textarea { font: inherit; }
 .container { width: min(1200px, calc(100% - 40px)); margin: 0 auto; }
 .text-center { text-align: center; }
@@ -39,6 +40,44 @@ button, input, select, textarea { font: inherit; }
 #adminDashboard > header > div { flex-wrap: wrap; }
 table { min-width: 680px; }
 th, td { vertical-align: middle; }
+.login-shell {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 34px 20px;
+  background:
+    radial-gradient(ellipse at 14% 20%, rgba(25, 118, 210, .42), transparent 38%),
+    radial-gradient(ellipse at 86% 78%, rgba(255, 101, 12, .19), transparent 36%),
+    linear-gradient(135deg, #031633, #052653 54%, #073b78);
+}
+.login-shell::before, .login-shell::after { content: ""; position: absolute; z-index: -1; border-radius: 50%; filter: blur(2px); pointer-events: none; }
+.login-shell::before { width: min(72vw, 850px); aspect-ratio: 1; top: -48%; left: -20%; background: radial-gradient(circle, rgba(40, 130, 230, .19), transparent 67%); }
+.login-shell::after { width: min(68vw, 780px); aspect-ratio: 1; right: -19%; bottom: -58%; background: radial-gradient(circle, rgba(25, 102, 191, .25), transparent 68%); }
+.login-card { width: min(100%, 450px); padding: clamp(25px, 5vw, 42px); border: 1px solid rgba(194, 220, 255, .25); border-radius: 22px; background: rgba(6, 28, 62, .78); box-shadow: 0 24px 80px rgba(0, 8, 27, .42); backdrop-filter: blur(16px); }
+.login-brand { display: flex; justify-content: center; margin: 0 0 22px; }
+.login-logo { display: block; width: min(280px, 82%); max-height: 150px; object-fit: contain; mix-blend-mode: screen; filter: drop-shadow(0 8px 20px rgba(0, 0, 0, .2)); }
+.login-heading { margin-bottom: 25px; }
+.login-heading h1 { margin: 0; color: #fff; font-size: clamp(21px, 5vw, 26px); font-weight: 900; letter-spacing: .02em; }
+.login-heading p { margin: 7px 0 0; color: #c4d5ed; font-size: 14px; }
+.login-field { gap: 6px; margin-bottom: 17px; }
+.login-field label { color: #e1ebf8; }
+.login-field input { width: 100%; min-height: 47px; padding: 11px 13px; border: 1px solid rgba(186, 209, 239, .35); border-radius: 9px; color: #fff; background: rgba(255, 255, 255, .08); }
+.login-field input::placeholder { color: #aabbd2; }
+.login-field input:focus { border-color: #ff8a43; outline: 3px solid rgba(255, 101, 12, .18); }
+.login-submit { width: 100%; min-height: 48px; margin-top: 4px; border: 0; cursor: pointer; }
+.login-error { margin: 0 0 13px; color: #ffd0c8; font-size: 13px; }
+.login-error:not([hidden]) { display: block; }
+.admin-form-actions { flex-direction: row; align-items: center; gap: 10px; }
+.product-form-status { flex: 1 1 100%; min-height: 1.3em; margin: 0; color: var(--text-light); font-size: .85rem; }
+.btn-secondary, .btn-admin-action { padding: 9px 12px; border: 1px solid var(--border-color); border-radius: 7px; color: var(--primary-blue); background: #fff; font-size: .78rem; font-weight: 800; cursor: pointer; }
+.btn-secondary:hover, .btn-admin-action:hover { background: #eef4fb; }
+.btn-admin-action[data-action="delete"] { border-color: #f5caca; color: #a32626; background: #fff1f1; }
+.admin-action-group { display: flex; gap: 6px; }
+.admin-error-row { color: #a32626; }
 input:focus-visible, select:focus-visible, textarea:focus-visible, button:focus-visible, a:focus-visible {
   outline: 3px solid #ffb17c;
   outline-offset: 3px;
@@ -55,7 +94,8 @@ input:focus-visible, select:focus-visible, textarea:focus-visible, button:focus-
 
 @media (max-width: 560px) {
   #loginSection { padding: 16px; }
-  #loginSection > div { padding: 24px 18px !important; }
+  .login-card { padding: 26px 19px; }
+  .login-logo { max-height: 125px; }
   #adminDashboard > header h2 { font-size: 1.05rem !important; }
   .col-6, .col-4 { flex-basis: 100%; width: 100%; }
   .form-grid { gap: 14px; }
