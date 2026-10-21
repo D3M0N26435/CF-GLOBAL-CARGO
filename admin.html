@@ -16,7 +16,7 @@
             </div>
             <div class="text-center login-heading">
                 <h1>ACCESO ADMINISTRADOR</h1>
-                <p>Gestión de catálogos</p>
+                <p>Gestión de catálogos y cotizaciones</p>
             </div>
             <form id="loginForm">
                 <div class="form-group login-field">
@@ -48,19 +48,13 @@
             </div>
         </header>
 
-        <main class="container" style="padding: 40px 20px;">
-            <section class="admin-surface tariff-settings" aria-labelledby="tariffSettingsTitle">
-                <h3 id="tariffSettingsTitle" style="color: var(--primary-blue); margin: 0 0 8px;">⚙️ Tarifas del cotizador</h3>
-                <p class="tariff-intro">Configura en bolivianos la base, los cargos por peso, volumen, caja o contenedor y el margen. Cada servicio puede usar su propia fórmula; el cliente verá una estimación cuando la actives.</p>
-                <form id="tariffForm">
-                    <div id="tariffEditor" class="tariff-editor"></div>
-                    <div class="admin-form-actions">
-                        <button type="submit" id="saveTariffsButton" class="btn-cotizar-header" style="border:none; cursor:pointer;">GUARDAR TARIFAS</button>
-                        <p id="tariffFormStatus" class="product-form-status" role="status" aria-live="polite"></p>
-                    </div>
-                </form>
-            </section>
+        <main class="container admin-main" style="padding: 40px 20px;">
+            <div class="admin-tabs" role="tablist" aria-label="Secciones del administrador">
+                <button class="admin-tab" id="tab-catalog" type="button" role="tab" aria-selected="true" aria-controls="panel-catalog" tabindex="0" data-admin-tab="catalog">📦 Catálogo</button>
+                <button class="admin-tab" id="tab-quotations" type="button" role="tab" aria-selected="false" aria-controls="panel-quotations" tabindex="-1" data-admin-tab="quotations">⚙️ Cotizaciones</button>
+            </div>
 
+            <section class="admin-tab-panel" id="panel-catalog" role="tabpanel" aria-labelledby="tab-catalog" data-admin-panel="catalog" tabindex="0">
             <!-- Formulario para Agregar Producto -->
             <div class="admin-surface" style="background: var(--white); padding: 30px; border-radius: 12px; border: 1px solid var(--border-color); margin-bottom: 40px;">
                 <h3 id="productFormTitle" style="color: var(--primary-blue); margin-bottom: 20px;">📦 Registrar Nuevo Producto en Catálogo</h3>
@@ -141,6 +135,21 @@
                     </table>
                 </div>
             </div>
+            </section>
+
+            <section class="admin-tab-panel" id="panel-quotations" role="tabpanel" aria-labelledby="tab-quotations" data-admin-panel="quotations" tabindex="0" hidden>
+                <section class="admin-surface tariff-settings" aria-labelledby="tariffSettingsTitle">
+                    <h3 id="tariffSettingsTitle" style="color: var(--primary-blue); margin: 0 0 8px;">⚙️ Tarifas del cotizador</h3>
+                    <p class="tariff-intro">Configura en bolivianos la base, los cargos por peso, volumen, caja o contenedor y el margen. Cada servicio puede usar su propia fórmula; el cliente verá una estimación cuando la actives.</p>
+                    <form id="tariffForm">
+                        <div id="tariffEditor" class="tariff-editor"></div>
+                        <div class="admin-form-actions">
+                            <button type="submit" id="saveTariffsButton" class="btn-cotizar-header" style="border:none; cursor:pointer;">GUARDAR TARIFAS</button>
+                            <p id="tariffFormStatus" class="product-form-status" role="status" aria-live="polite"></p>
+                        </div>
+                    </form>
+                </section>
+            </section>
         </main>
     </div>
 

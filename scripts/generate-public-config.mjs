@@ -4,6 +4,7 @@ import { fileURLToPath } from "node:url";
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)), "..");
 const envPath = resolve(root, ".env");
+const examplePath = resolve(root, ".env.example");
 const outputPath = resolve(root, "js/public-config.js");
 
 function parseEnv(source) {
@@ -25,11 +26,11 @@ function parseEnv(source) {
   return values;
 }
 
-const source = await readFile(envPath, "utf8").catch((error) => {
-  if (error.code === "ENOENT") return "";
-  throw error;
-});
-const env = parseEnv(source);
+const [exampleSource, envSource] = await Promise.all([
+  readFile(examplePath, "utf8").catch((error) => error.code === "ENOENT" ? "" : Promise.reject(error)),
+  readFile(envPath, "utf8").catch((error) => error.code === "ENOENT" ? "" : Promise.reject(error))
+]);
+const env = { ...parseEnv(exampleSource), ...parseEnv(envSource) };
 const publicConfig = {
   socialTikTokUrl: env.SOCIAL_TIKTOK_URL || "",
   socialFacebookUrl: env.SOCIAL_FACEBOOK_URL || "",
@@ -41,6 +42,6 @@ const publicConfig = {
   whatsappRecipient2: (env.WHATSAPP_QUOTE_RECIPIENT_2 || "").replace(/\D/g, "")
 };
 
-const output = `// Generado desde .env. No agregues secretos a este archivo.\nwindow.APP_CONFIG = Object.freeze(${JSON.stringify(publicConfig, null, 2)});\n`;
+const output = `// Generado desde .env y .env.example. No agregues secretos aquí.\nwindow.APP_CONFIG = Object.freeze(${JSON.stringify(publicConfig, null, 2)});\n`;
 await writeFile(outputPath, output, "utf8");
-console.log("Configuración pública actualizada en js/public-config.js.");
+console.log("Configuración pública actualizada desde .env y .env.example en js/public-config.js.");

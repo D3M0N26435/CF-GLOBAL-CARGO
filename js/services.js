@@ -9,6 +9,18 @@ const formRoot = document.querySelector("#serviceFormContent");
 const APP_CONFIG = window.APP_CONFIG || {};
 let tariffs = {};
 
+const SERVICE_ICONS = Object.freeze({
+  boxes: "<svg viewBox='0 0 48 48' fill='none' stroke='currentColor' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'><path d='m24 5 13 7.5v15L24 35l-13-7.5v-15L24 5Z'/><path d='M11 12.5 24 20l13-7.5M24 20v15M7 23l8 4.6M41 23l-8 4.6'/><path d='m15 31 9 5 9-5'/></svg>",
+  box: "<svg viewBox='0 0 48 48' fill='none' stroke='currentColor' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'><path d='m24 5 17 9.5v19L24 43 7 33.5v-19L24 5Z'/><path d='M7 14.5 24 24l17-9.5M24 24v19M18 8.4l17 9.5v8'/><path d='M15 10l17 9.5v7'/></svg>",
+  container: "<svg viewBox='0 0 48 48' fill='none' stroke='currentColor' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'><rect x='5' y='11' width='38' height='25' rx='3'/><path d='M12 11v25M19 11v25M26 11v25M33 11v25M5 18h38M10 41h28M14 36v5M34 36v5'/></svg>",
+  ship: "<svg viewBox='0 0 48 48' fill='none' stroke='currentColor' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'><path d='M8 24h32l-5 11H15L8 24Z'/><path d='M14 24V13h20v11M19 13V8h10v5M5 40c3-2 5-2 8 0s5 2 8 0 5-2 8 0 5 2 8 0 5-2 8 0'/><path d='m7 35-2 5M41 35l2 5'/></svg>",
+  plane: "<svg viewBox='0 0 48 48' fill='none' stroke='currentColor' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'><path d='m5 27 15-4V10c0-2 1.5-3 3-3s3 1 3 3v13l15 4c1.5.4 2.5 1.5 2.5 3 0 1.4-1.3 2.4-2.7 2.1L26 29l-2 12-3-1-4-13-9 2.4C6 30 4.5 29 4.5 27.8c0-.4.2-.7.5-.8Z'/><path d='m20 14 3 3 3-3'/></svg>",
+  truck: "<svg viewBox='0 0 48 48' fill='none' stroke='currentColor' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'><path d='M5 12h24v22H5zM29 20h8l6 7v7H29z'/><path d='M37 20v8h6M10 34a4 4 0 1 0 8 0M33 34a4 4 0 1 0 8 0M10 18h14M10 23h9'/></svg>",
+  document: "<svg viewBox='0 0 48 48' fill='none' stroke='currentColor' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'><path d='M13 5h15l9 9v20a4 4 0 0 1-4 4H13a4 4 0 0 1-4-4V9a4 4 0 0 1 4-4Z'/><path d='M28 5v10h9M16 22h15M16 28h11'/><path d='m17 34 3 3 6-6'/></svg>",
+  verify: "<svg viewBox='0 0 48 48' fill='none' stroke='currentColor' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'><circle cx='21' cy='20' r='12'/><path d='m30 29 10 10'/><path d='m16 20 4 4 7-8'/><path d='M16 9c2-2 4-3 7-3'/></svg>",
+  advice: "<svg viewBox='0 0 48 48' fill='none' stroke='currentColor' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'><path d='M7 10h25a5 5 0 0 1 5 5v12a5 5 0 0 1-5 5H19l-9 7v-7a5 5 0 0 1-5-5V15a5 5 0 0 1 2-4Z'/><path d='M15 19h14M15 25h10'/><path d='M37 17h3a4 4 0 0 1 4 4v8a4 4 0 0 1-4 4v5l-6-5'/></svg>"
+});
+
 function escapeText(value) {
   return String(value ?? "").replace(/[&<>"']/g, (character) => ({
     "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;"
@@ -21,7 +33,7 @@ function makeOptionCard(service) {
   const icon = document.createElement("span");
   icon.className = "service-card-icon";
   icon.setAttribute("aria-hidden", "true");
-  icon.textContent = service.icon;
+  icon.innerHTML = SERVICE_ICONS[service.icon] || SERVICE_ICONS.box;
   const origin = document.createElement("small");
   origin.className = "service-card-origin";
   origin.textContent = service.origin;

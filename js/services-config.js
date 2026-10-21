@@ -4,7 +4,7 @@ export const SERVICES = [
     title: "Consolidación de carga LCL / CBM",
     shortTitle: "Consolidación LCL / CBM · China",
     origin: "China → Bolivia",
-    icon: "▣",
+    icon: "boxes",
     description: "Consolida mercancía de distintos proveedores y cotiza según peso y volumen.",
     fields: [
       { name: "ciudadOrigen", label: "Ciudad o almacén en China", placeholder: "Ej. Yiwu, Guangzhou, Shenzhen" },
@@ -21,7 +21,7 @@ export const SERVICES = [
     title: "Carga por caja desde ZOFRI – Iquique",
     shortTitle: "Carga por caja · ZOFRI Iquique",
     origin: "Iquique → Bolivia",
-    icon: "⌂",
+    icon: "box",
     description: "Calcula peso y volumen de tus cajas para solicitar el traslado desde Iquique.",
     fields: [
       { name: "cantidadCajas", label: "Cantidad de cajas", type: "number", required: true, min: 1, step: 1, placeholder: "Ej. 10" },
@@ -40,7 +40,7 @@ export const SERVICES = [
     title: "Contenedores completos – FCL",
     shortTitle: "Contenedor completo · FCL",
     origin: "Internacional → Bolivia",
-    icon: "▤",
+    icon: "container",
     description: "Solicita una estimación para contenedor completo y coordinación logística.",
     fields: [
       { name: "tipoContenedor", label: "Tipo de contenedor", type: "select", required: true, options: ["20 pies", "40 pies", "40 pies High Cube", "Otro / necesito asesoría"] },
@@ -57,7 +57,7 @@ export const SERVICES = [
     title: "Transporte marítimo",
     shortTitle: "Transporte marítimo",
     origin: "Internacional → Bolivia",
-    icon: "◒",
+    icon: "ship",
     description: "Coordina embarques marítimos según origen, mercancía, peso y volumen.",
     fields: [
       { name: "puertoOrigen", label: "Puerto o país de origen", required: true, placeholder: "Ej. Shanghai, China" },
@@ -74,7 +74,7 @@ export const SERVICES = [
     title: "Flete aéreo",
     shortTitle: "Flete aéreo",
     origin: "Internacional → Bolivia",
-    icon: "✈",
+    icon: "plane",
     description: "Cotiza carga aérea urgente o de alto valor con los datos básicos de tu envío.",
     fields: [
       { name: "ciudadOrigen", label: "Ciudad / aeropuerto de origen", required: true, placeholder: "Ej. Guangzhou, China" },
@@ -92,7 +92,7 @@ export const SERVICES = [
     title: "Flete terrestre",
     shortTitle: "Flete terrestre",
     origin: "Ruta terrestre",
-    icon: "▰",
+    icon: "truck",
     description: "Solicita transporte terrestre con origen, destino y características de la carga.",
     fields: [
       { name: "ciudadOrigen", label: "Ciudad de origen", required: true, placeholder: "Ej. Iquique, Chile" },
@@ -110,7 +110,7 @@ export const SERVICES = [
     title: "Gestión documental",
     shortTitle: "Gestión documental",
     origin: "Importación → Bolivia",
-    icon: "▤",
+    icon: "document",
     description: "Indica qué documentos necesitas revisar o gestionar para tu importación.",
     fields: [
       { name: "tipoGestion", label: "Gestión que necesitas", type: "select", required: true, options: ["Revisión de factura comercial", "Lista de empaque", "Documentos de transporte", "Certificados de origen / producto", "Asesoría de importación", "Otra gestión"] },
@@ -126,7 +126,7 @@ export const SERVICES = [
     title: "Verificación de proveedores",
     shortTitle: "Verificación de proveedores",
     origin: "Proveedor internacional",
-    icon: "⌕",
+    icon: "verify",
     description: "Comparte los datos del proveedor y producto que deseas validar.",
     fields: [
       { name: "nombreProveedor", label: "Nombre de la empresa proveedora", required: true, placeholder: "Nombre comercial" },
@@ -142,7 +142,7 @@ export const SERVICES = [
     title: "Asesoría personalizada",
     shortTitle: "Asesoría personalizada",
     origin: "Tu proyecto de importación",
-    icon: "✧",
+    icon: "advice",
     description: "Cuéntanos tu proyecto para orientarte en compras, logística y costos.",
     fields: [
       { name: "etapaProyecto", label: "Etapa de tu proyecto", type: "select", required: true, options: ["Estoy empezando a investigar", "Ya elegí un producto", "Ya tengo proveedor", "Tengo una carga en camino", "Necesito resolver un problema"] },

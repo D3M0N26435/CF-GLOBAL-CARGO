@@ -26,6 +26,35 @@ const tariffForm = document.getElementById('tariffForm');
 const tariffEditor = document.getElementById('tariffEditor');
 const tariffFormStatus = document.getElementById('tariffFormStatus');
 const saveTariffsButton = document.getElementById('saveTariffsButton');
+const adminTabButtons = [...document.querySelectorAll('[data-admin-tab]')];
+const adminTabPanels = [...document.querySelectorAll('[data-admin-panel]')];
+
+function activateAdminTab(name, moveFocus = false) {
+    adminTabButtons.forEach((button) => {
+        const selected = button.dataset.adminTab === name;
+        button.setAttribute('aria-selected', String(selected));
+        button.tabIndex = selected ? 0 : -1;
+        if (selected && moveFocus) button.focus();
+    });
+    adminTabPanels.forEach((panel) => {
+        panel.hidden = panel.dataset.adminPanel !== name;
+    });
+}
+
+adminTabButtons.forEach((button) => {
+    button.addEventListener('click', () => activateAdminTab(button.dataset.adminTab));
+    button.addEventListener('keydown', (event) => {
+        const currentIndex = adminTabButtons.indexOf(button);
+        let nextIndex = currentIndex;
+        if (event.key === 'ArrowRight') nextIndex = (currentIndex + 1) % adminTabButtons.length;
+        else if (event.key === 'ArrowLeft') nextIndex = (currentIndex - 1 + adminTabButtons.length) % adminTabButtons.length;
+        else if (event.key === 'Home') nextIndex = 0;
+        else if (event.key === 'End') nextIndex = adminTabButtons.length - 1;
+        else return;
+        event.preventDefault();
+        activateAdminTab(adminTabButtons[nextIndex].dataset.adminTab, true);
+    });
+});
 
 let productsList = [];
 let editingProductId = null;
