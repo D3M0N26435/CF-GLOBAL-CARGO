@@ -29,10 +29,11 @@ function safeImageUrl(value) {
   }
 }
 
-function formatPrice(value) {
+function formatPrice(value, currency = "BOB") {
   const price = Number(value);
+  if (currency !== "BOB") return "Precio pendiente de actualizar en Bs.";
   return Number.isFinite(price) && price > 0
-    ? `US$ ${price.toLocaleString("es-BO", { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`
+    ? `Bs ${price.toLocaleString("es-BO", { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`
     : "Consultar";
 }
 
@@ -70,23 +71,25 @@ function renderProduct(product) {
 
   const prices = makeElement("div", "product-prices");
   const unitPrice = makeElement("div");
-  unitPrice.append("Precio unitario: ", makeElement("strong", "", formatPrice(product.precioUnitario)));
+  unitPrice.append("Precio unitario: ", makeElement("strong", "", formatPrice(product.precioUnitario, product.moneda)));
   prices.append(unitPrice);
   if (Number(product.precioCaja) > 0) {
     const boxPrice = makeElement("div");
-    boxPrice.append("Por caja: ", makeElement("strong", "", formatPrice(product.precioCaja)));
+    boxPrice.append("Por caja: ", makeElement("strong", "", formatPrice(product.precioCaja, product.moneda)));
     if (Number(product.unidadesCaja) > 0) boxPrice.append(` · ${product.unidadesCaja} unidades`);
     prices.append(boxPrice);
   }
-  if (product.precioBolivia) {
+  if (product.moneda === "BOB" && Number(product.precioBolivia) > 0) {
     const boliviaPrice = makeElement("div");
-    boliviaPrice.append("En Bolivia: ", makeElement("strong", "", product.precioBolivia));
+    boliviaPrice.append("En Bolivia: ", makeElement("strong", "", formatPrice(product.precioBolivia, product.moneda)));
     prices.append(boliviaPrice);
+  } else if (product.moneda !== "BOB") {
+    prices.append(makeElement("div", "legacy-price-notice", "Precio pendiente de actualizar en Bs."));
   }
   content.append(prices);
 
   const quoteLink = makeElement("a", "button button-orange product-card-quote", "CONSULTAR PRODUCTO →");
-  quoteLink.href = `index.html#contacto`;
+  quoteLink.href = `index.html#servicios`;
   quoteLink.setAttribute("aria-label", `Consultar por ${product.nombre || "este producto"}`);
   content.append(quoteLink);
   card.append(media, content);
@@ -107,7 +110,11 @@ function renderCatalog() {
   if (productSort.value === "name") {
     filteredProducts.sort((a, b) => String(a.nombre || "").localeCompare(String(b.nombre || ""), "es"));
   } else if (productSort.value === "price") {
-    filteredProducts.sort((a, b) => (Number(a.precioUnitario) || 0) - (Number(b.precioUnitario) || 0));
+    filteredProducts.sort((a, b) => {
+      const priceA = a.moneda === "BOB" ? Number(a.precioUnitario) || 0 : Number.POSITIVE_INFINITY;
+      const priceB = b.moneda === "BOB" ? Number(b.precioUnitario) || 0 : Number.POSITIVE_INFINITY;
+      return priceA === priceB ? 0 : priceA - priceB;
+    });
   } else {
     filteredProducts.sort((a, b) => {
       const dateA = a.fechaCreacion?.toDate?.()?.getTime?.() || 0;

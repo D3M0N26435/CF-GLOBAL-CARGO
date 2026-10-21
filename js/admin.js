@@ -1,6 +1,8 @@
 import { auth, db } from './firebase-config.js';
 import { signInWithEmailAndPassword, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
-import { collection, addDoc, getDocs, doc, deleteDoc, query, orderBy, updateDoc } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
+import { collection, addDoc, getDocs, doc, deleteDoc, query, orderBy, updateDoc, getDoc, setDoc } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
+import { DEFAULT_TARIFF, SERVICES, TARIFF_VARIABLES } from "./services-config.js";
+import { evaluateFormula } from "./formula.js";
 
 // Configuración pública de subida de imágenes en Cloudinary.
 const CLOUD_NAME = "dsbzdsrgk";
@@ -20,6 +22,10 @@ const cancelEditButton = document.getElementById('cancelEditButton');
 const productFormTitle = document.getElementById('productFormTitle');
 const productFormStatus = document.getElementById('productFormStatus');
 const productImageInput = document.getElementById('prod-imagenFile');
+const tariffForm = document.getElementById('tariffForm');
+const tariffEditor = document.getElementById('tariffEditor');
+const tariffFormStatus = document.getElementById('tariffFormStatus');
+const saveTariffsButton = document.getElementById('saveTariffsButton');
 
 let productsList = [];
 let editingProductId = null;
@@ -28,7 +34,10 @@ let editingImageUrl = "";
 onAuthStateChanged(auth, (user) => {
     loginSection.style.display = user ? 'none' : 'flex';
     adminDashboard.style.display = user ? 'block' : 'none';
-    if (user) loadAdminProducts();
+    if (user) {
+        loadAdminProducts();
+        loadAdminTariffs();
+    }
 });
 
 loginForm.addEventListener('submit', async (event) => {
@@ -50,6 +59,91 @@ loginForm.addEventListener('submit', async (event) => {
 
 btnLogout.addEventListener('click', () => signOut(auth));
 cancelEditButton.addEventListener('click', resetProductForm);
+
+tariffEditor.innerHTML = SERVICES.map((service) => `
+    <article class="tariff-service-card" data-tariff-service="${service.id}">
+        <div class="tariff-service-heading">
+            <div><h4>${service.title}</h4><p>${service.origin}</p></div>
+            <label class="tariff-enable"><input type="checkbox" data-tariff-enabled> Mostrar estimación</label>
+        </div>
+        <div class="tariff-rate-grid">
+            <label>Base (Bs.)<input type="number" min="0" step="0.01" data-tariff-field="baseBOB"></label>
+            <label>Por kg (Bs.)<input type="number" min="0" step="0.01" data-tariff-field="tarifaKg"></label>
+            <label>Por m³ / CBM (Bs.)<input type="number" min="0" step="0.01" data-tariff-field="tarifaCbm"></label>
+            <label>Por caja / bulto (Bs.)<input type="number" min="0" step="0.01" data-tariff-field="tarifaCaja"></label>
+            <label>Por contenedor (Bs.)<input type="number" min="0" step="0.01" data-tariff-field="tarifaContenedor"></label>
+            <label>Margen (%)<input type="number" min="0" step="0.01" data-tariff-field="margen"></label>
+        </div>
+        <label class="tariff-formula-label">Fórmula para este servicio
+            <textarea rows="2" spellcheck="false" data-tariff-field="formula"></textarea>
+        </label>
+        <small class="tariff-variables">Variables permitidas: ${TARIFF_VARIABLES}. Operadores: + − × ÷ y paréntesis.</small>
+    </article>`).join('');
+
+tariffForm.addEventListener('submit', async (event) => {
+    event.preventDefault();
+    saveTariffsButton.disabled = true;
+    tariffFormStatus.textContent = "Guardando tarifas…";
+    const tarifas = {};
+    try {
+        for (const service of SERVICES) {
+            const card = tariffEditor.querySelector(`[data-tariff-service="${service.id}"]`);
+            const formula = card.querySelector('[data-tariff-field="formula"]').value.trim();
+            const settings = {
+                enabled: card.querySelector('[data-tariff-enabled]').checked,
+                baseBOB: numericRate(card, "baseBOB"),
+                tarifaKg: numericRate(card, "tarifaKg"),
+                tarifaCbm: numericRate(card, "tarifaCbm"),
+                tarifaCaja: numericRate(card, "tarifaCaja"),
+                tarifaContenedor: numericRate(card, "tarifaContenedor"),
+                margen: numericRate(card, "margen"),
+                formula
+            };
+            if (settings.enabled && !formula) throw new Error(`Escribe la fórmula para “${service.title}”.`);
+            if (formula) evaluateFormula(formula, {
+                base: settings.baseBOB, kg: 10, cbm: 1, cajas: 2, contenedores: 1,
+                tarifaKg: settings.tarifaKg, tarifaCbm: settings.tarifaCbm,
+                tarifaCaja: settings.tarifaCaja, tarifaContenedor: settings.tarifaContenedor,
+                margen: settings.margen
+            });
+            tarifas[service.id] = settings;
+        }
+        await setDoc(doc(db, "configuracion", "cotizaciones"), { tarifas, fechaActualizacion: new Date() }, { merge: true });
+        tariffFormStatus.textContent = "Tarifas guardadas. El cotizador ya puede usarlas.";
+    } catch (error) {
+        console.error("Error guardando tarifas:", error);
+        tariffFormStatus.textContent = error.message || "No se pudieron guardar las tarifas.";
+    } finally {
+        saveTariffsButton.disabled = false;
+    }
+});
+
+function numericRate(card, field) {
+    const value = Number(card.querySelector(`[data-tariff-field="${field}"]`).value);
+    if (!Number.isFinite(value) || value < 0) throw new Error("Las tarifas deben ser números iguales o mayores que cero.");
+    return value;
+}
+
+async function loadAdminTariffs() {
+    tariffFormStatus.textContent = "Cargando tarifas…";
+    try {
+        const snapshot = await getDoc(doc(db, "configuracion", "cotizaciones"));
+        const saved = snapshot.exists() ? snapshot.data().tarifas || {} : {};
+        SERVICES.forEach((service) => {
+            const settings = { ...DEFAULT_TARIFF, ...(saved[service.id] || {}) };
+            const card = tariffEditor.querySelector(`[data-tariff-service="${service.id}"]`);
+            card.querySelector('[data-tariff-enabled]').checked = Boolean(settings.enabled);
+            Object.entries(settings).forEach(([key, value]) => {
+                const field = card.querySelector(`[data-tariff-field="${key}"]`);
+                if (field) field.value = value;
+            });
+        });
+        tariffFormStatus.textContent = snapshot.exists() ? "Tarifas actuales cargadas." : "Configura tarifas para habilitar las estimaciones automáticas.";
+    } catch (error) {
+        console.error("Error cargando tarifas:", error);
+        tariffFormStatus.textContent = "No se pudieron cargar las tarifas. Revisa permisos de Firestore.";
+    }
+}
 
 addProductForm.addEventListener('submit', async (event) => {
     event.preventDefault();
@@ -78,7 +172,8 @@ addProductForm.addEventListener('submit', async (event) => {
             precioUnitario: Number(document.getElementById('prod-precioUnitario').value) || 0,
             precioCaja: Number(document.getElementById('prod-precioCaja').value) || 0,
             unidadesCaja: Number.parseInt(document.getElementById('prod-unidadesCaja').value, 10) || 0,
-            precioBolivia: document.getElementById('prod-precioBolivia').value.trim(),
+            precioBolivia: Number(document.getElementById('prod-precioBolivia').value) || 0,
+            moneda: "BOB",
             imagenUrl: imageUrl,
             disponibilidad: document.getElementById('prod-disponibilidad').value,
             fechaActualizacion: new Date()
@@ -148,6 +243,13 @@ function safeImageUrl(value) {
     }
 }
 
+function formatBolivianos(value) {
+    const amount = Number(value);
+    return Number.isFinite(amount) && amount > 0
+        ? `Bs ${amount.toLocaleString("es-BO", { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`
+        : "Consultar";
+}
+
 function renderAdminTable() {
     if (!productsList.length) {
         adminTableBody.innerHTML = '<tr><td colspan="6" class="text-center" style="padding:20px;">No hay productos registrados.</td></tr>';
@@ -160,13 +262,15 @@ function renderAdminTable() {
             ? `<img src="${escapeHtml(imageUrl)}" style="width:45px;height:45px;object-fit:cover;border-radius:6px;" alt="">`
             : '<span aria-label="Sin fotografía">—</span>';
         const category = categoryLabels[product.categoria] || product.categoria || "Sin origen";
+        const priceUnit = product.moneda === "BOB" ? formatBolivianos(product.precioUnitario) : "Pendiente actualizar en Bs.";
+        const priceBolivia = product.moneda === "BOB" ? formatBolivianos(product.precioBolivia) : "Pendiente actualizar en Bs.";
         return `
             <tr style="border-bottom:1px solid var(--border-color);">
                 <td style="padding:10px;">${image}</td>
                 <td style="padding:10px;"><strong>${escapeHtml(product.nombre)}</strong><br><small>${escapeHtml(product.subcategoria || "")}</small></td>
                 <td style="padding:10px;"><span style="font-size:.75rem;font-weight:800;color:var(--accent-orange);">${escapeHtml(category)}</span></td>
-                <td style="padding:10px;">US$ ${escapeHtml(product.precioUnitario)}</td>
-                <td style="padding:10px;"><strong style="color:var(--primary-blue);">${escapeHtml(product.precioBolivia)}</strong></td>
+                <td style="padding:10px;">${escapeHtml(priceUnit)}</td>
+                <td style="padding:10px;"><strong style="color:var(--primary-blue);">${escapeHtml(priceBolivia)}</strong></td>
                 <td style="padding:10px;"><div class="admin-action-group">
                     <button type="button" class="btn-admin-action" data-action="edit" data-id="${escapeHtml(product.id)}">Editar</button>
                     <button type="button" class="btn-admin-action" data-action="delete" data-id="${escapeHtml(product.id)}">Eliminar</button>
@@ -195,17 +299,20 @@ function startEditingProduct(product) {
     document.getElementById('prod-subcategoria').value = product.subcategoria || "";
     document.getElementById('prod-nombre').value = product.nombre || "";
     document.getElementById('prod-desc').value = product.descripcion || "";
-    document.getElementById('prod-precioUnitario').value = product.precioUnitario ?? "";
-    document.getElementById('prod-precioCaja').value = product.precioCaja ?? "";
+    const legacyCurrency = product.moneda !== "BOB";
+    document.getElementById('prod-precioUnitario').value = legacyCurrency ? "" : product.precioUnitario ?? "";
+    document.getElementById('prod-precioCaja').value = legacyCurrency ? "" : product.precioCaja ?? "";
     document.getElementById('prod-unidadesCaja').value = product.unidadesCaja ?? "";
-    document.getElementById('prod-precioBolivia').value = product.precioBolivia || "";
+    document.getElementById('prod-precioBolivia').value = legacyCurrency ? "" : product.precioBolivia ?? "";
     document.getElementById('prod-disponibilidad').value = product.disponibilidad || "disponible";
     productImageInput.value = "";
     productImageInput.required = false;
     productFormTitle.textContent = `Editar producto: ${product.nombre || "Producto"}`;
     saveProductButton.textContent = "GUARDAR CAMBIOS";
     cancelEditButton.hidden = false;
-    productFormStatus.textContent = editingImageUrl ? "La fotografía actual se conserva si no seleccionas otra." : "Selecciona una fotografía para este producto.";
+    productFormStatus.textContent = legacyCurrency
+        ? "Este producto tiene precios antiguos sin moneda registrada. Ingresa nuevamente los tres precios en Bs.; no se aplicó una conversión automática."
+        : editingImageUrl ? "La fotografía actual se conserva si no seleccionas otra." : "Selecciona una fotografía para este producto.";
     addProductForm.scrollIntoView({ behavior: "smooth", block: "start" });
     document.getElementById('prod-nombre').focus({ preventScroll: true });
 }

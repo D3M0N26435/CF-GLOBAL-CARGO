@@ -21,6 +21,7 @@
 
     <nav class="main-nav" id="mainNav" aria-label="Navegación principal">
       <a class="active" href="#inicio">INICIO</a>
+      <a href="#servicios">SERVICIOS</a>
       <a href="#catalogo">CATÁLOGO</a>
       <a href="#nosotros">NOSOTROS</a>
       <a href="#comunidades">COMUNIDADES</a>
@@ -28,20 +29,20 @@
     </nav>
 
     <div class="socials" aria-label="Redes sociales">
-      <a class="social tiktok" href="#" aria-label="TikTok">
+      <a class="social tiktok" href="#" data-social-key="tiktok" aria-label="TikTok">
         <svg class="social-icon tiktok-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
           <path class="tiktok-cyan" d="M16.4 3.2a5.4 5.4 0 0 0 4.2 4.6v3.4a8.8 8.8 0 0 1-4.2-1.1v6.1a6 6 0 1 1-6-6c.5 0 1 .1 1.5.2v3.6a2.6 2.6 0 1 0 1.2 2.2V3.2z"/>
           <path class="tiktok-pink" d="M16.4 3.2a5.4 5.4 0 0 0 4.2 4.6v3.4a8.8 8.8 0 0 1-4.2-1.1v6.1a6 6 0 1 1-6-6c.5 0 1 .1 1.5.2v3.6a2.6 2.6 0 1 0 1.2 2.2V3.2z"/>
           <path class="tiktok-white" d="M16.4 3.2a5.4 5.4 0 0 0 4.2 4.6v3.4a8.8 8.8 0 0 1-4.2-1.1v6.1a6 6 0 1 1-6-6c.5 0 1 .1 1.5.2v3.6a2.6 2.6 0 1 0 1.2 2.2V3.2z"/>
         </svg>
       </a>
-      <a class="social facebook" href="#" aria-label="Facebook">
+      <a class="social facebook" href="#" data-social-key="facebook" aria-label="Facebook">
         <svg class="social-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M13.5 21v-8h2.7l.4-3.1h-3.1v-2c0-.9.3-1.5 1.6-1.5h1.7V3.6c-.3 0-1.3-.1-2.5-.1-2.5 0-4.2 1.5-4.2 4.3v2.1H7.4V13h2.7v8z"/></svg>
       </a>
-      <a class="social instagram" href="#" aria-label="Instagram">
+      <a class="social instagram" href="#" data-social-key="instagram" aria-label="Instagram">
         <svg class="social-icon instagram-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect x="3.2" y="3.2" width="17.6" height="17.6" rx="5"/><circle cx="12" cy="12" r="4.1"/><circle class="instagram-dot" cx="17.8" cy="6.5" r="1.1"/></svg>
       </a>
-      <a class="social whatsapp" href="#" aria-label="WhatsApp">
+      <a class="social whatsapp" href="#" data-social-key="whatsapp" aria-label="WhatsApp">
         <svg class="social-icon whatsapp-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M20.2 11.7a8.2 8.2 0 0 1-12.1 7.2L3 20l1.2-4.9a8.2 8.2 0 1 1 16-3.4Z"/><path d="M8.2 7.7c.2-.5.4-.5.7-.5h.5c.2 0 .4 0 .5.4l.8 1.9c.1.2.1.4-.1.6l-.6.7c-.2.2-.2.4 0 .6.4.7 1 1.3 1.7 1.8.7.5 1.2.7 1.6.8.2.1.4 0 .5-.1l.8-.9c.2-.2.4-.2.6-.1l1.8.9c.3.1.4.3.3.6l-.3 1c-.2.5-.9.8-1.5.9-.5.1-1.2.1-2-.2-.6-.2-1.4-.6-2.3-1.3-1.4-1.1-2.3-2.5-2.6-3-.3-.5-.8-1.4-.8-2.3 0-.9.4-1.4.6-1.8Z"/></svg>
       </a>
     </div>
@@ -62,7 +63,7 @@
         <p class="hero-subtitle">Importa con confianza, <strong>crece sin límites</strong></p>
         <div class="orange-rule"></div>
         <div class="hero-buttons">
-          <a class="button button-orange button-large" href="#contacto"><span class="cube">⬡</span> COTIZAR AHORA <span class="arrow">➜</span></a>
+          <a class="button button-orange button-large" href="#servicios"><span class="cube">⬡</span> COTIZAR AHORA <span class="arrow">➜</span></a>
           <a class="button button-outline button-large" href="#catalogo"><span class="big-cart">🛒</span> VER CATÁLOGO <span class="arrow">➜</span></a>
         </div>
       </div>
@@ -87,6 +88,20 @@
           </article>
         </div>
       </div>
+    </section>
+
+    <section class="services-section" id="servicios" aria-labelledby="servicesTitle">
+      <div class="section-heading">
+        <div>
+          <p class="section-kicker">SOLUCIONES PARA TU IMPORTACIÓN</p>
+          <h2 id="servicesTitle">NUESTROS SERVICIOS</h2>
+          <p>Elige la opción que necesitas. Te mostraremos el formulario y una estimación en bolivianos cuando el servicio tenga tarifas configuradas.</p>
+        </div>
+      </div>
+      <div id="serviceOptions" class="service-options" aria-label="Elige un servicio"></div>
+      <section id="serviceFormPanel" class="service-form-panel" aria-live="polite" hidden>
+        <div id="serviceFormContent"></div>
+      </section>
     </section>
 
     <section class="catalog-section" id="catalogo" aria-labelledby="catalogTitle">
@@ -132,10 +147,10 @@
             <div><h3>CHINA → BOLIVIA</h3><strong>Consolidación China</strong></div>
           </div>
           <p>Fechas de salida, novedades de almacenes y consejos para importar.</p>
-          <button class="button community-join" type="button" data-community-link="china" disabled>
+          <a class="button community-join" data-community-link="china" href="#comunidades" aria-disabled="true">
             <svg class="community-whatsapp" viewBox="0 0 24 24" aria-hidden="true"><path d="M20.2 11.7a8.2 8.2 0 0 1-12.1 7.2L3 20l1.2-4.9a8.2 8.2 0 1 1 16-3.4Z"/><path d="M8.2 7.7c.2-.5.4-.5.7-.5h.5c.2 0 .4 0 .5.4l.8 1.9c.1.2.1.4-.1.6l-.6.7c-.2.2-.2.4 0 .6.4.7 1 1.3 1.7 1.8.7.5 1.2.7 1.6.8.2.1.4 0 .5-.1l.8-.9c.2-.2.4-.2.6-.1l1.8.9c.3.1.4.3.3.6l-.3 1c-.2.5-.9.8-1.5.9-.5.1-1.2.1-2-.2-.6-.2-1.4-.6-2.3-1.3-1.4-1.1-2.3-2.5-2.6-3-.3-.5-.8-1.4-.8-2.3 0-.9.4-1.4.6-1.8Z"/></svg>
             UNIRME AL GRUPO DE CHINA <span aria-hidden="true">➜</span>
-          </button>
+          </a>
           <small class="community-pending">Enlace del grupo disponible próximamente.</small>
         </article>
         <article class="community-card community-card-zofri">
@@ -144,10 +159,10 @@
             <div><h3>CHILE · ZOFRI → BOLIVIA</h3><strong>Consolidación desde Iquique</strong></div>
           </div>
           <p>Oportunidades de productos, novedades de Zona Franca y salidas.</p>
-          <button class="button community-join" type="button" data-community-link="chile" disabled>
+          <a class="button community-join" data-community-link="chile" href="#comunidades" aria-disabled="true">
             <svg class="community-whatsapp" viewBox="0 0 24 24" aria-hidden="true"><path d="M20.2 11.7a8.2 8.2 0 0 1-12.1 7.2L3 20l1.2-4.9a8.2 8.2 0 1 1 16-3.4Z"/><path d="M8.2 7.7c.2-.5.4-.5.7-.5h.5c.2 0 .4 0 .5.4l.8 1.9c.1.2.1.4-.1.6l-.6.7c-.2.2-.2.4 0 .6.4.7 1 1.3 1.7 1.8.7.5 1.2.7 1.6.8.2.1.4 0 .5-.1l.8-.9c.2-.2.4-.2.6-.1l1.8.9c.3.1.4.3.3.6l-.3 1c-.2.5-.9.8-1.5.9-.5.1-1.2.1-2-.2-.6-.2-1.4-.6-2.3-1.3-1.4-1.1-2.3-2.5-2.6-3-.3-.5-.8-1.4-.8-2.3 0-.9.4-1.4.6-1.8Z"/></svg>
             UNIRME AL GRUPO DE CHILE <span aria-hidden="true">➜</span>
-          </button>
+          </a>
           <small class="community-pending">Enlace del grupo disponible próximamente.</small>
         </article>
       </div>
@@ -186,7 +201,7 @@
         </article>
       </div>
     </section>
-    <section class="below-section" id="contacto"><h2>Cotiza tu importación</h2><p>Añade aquí tu formulario, WhatsApp o datos de contacto.</p></section>
+    <section class="below-section" id="contacto"><h2>¿Listo para cotizar?</h2><p>Selecciona uno de nuestros servicios para contarnos los detalles de tu importación y recibir una estimación en bolivianos.</p><a class="button button-orange contact-quote-link" href="#servicios">ELEGIR UN SERVICIO <span aria-hidden="true">➜</span></a></section>
   </main>
 
   <dialog class="origin-dialog" id="originDialog" aria-labelledby="originDialogTitle" aria-describedby="originDialogSubtitle">
@@ -204,13 +219,15 @@
       <h3 class="origin-dialog-section-title">Servicios disponibles</h3>
       <ul class="origin-service-list" id="originServiceList"></ul>
       <div class="origin-dialog-actions">
-        <a class="button button-orange" id="originQuoteLink" href="#contacto">
+        <a class="button button-orange" id="originQuoteLink" href="#servicios">
           <span id="originQuoteLabel">COTIZAR</span><span aria-hidden="true">➜</span>
         </a>
       </div>
     </div>
   </dialog>
 
+  <script src="js/public-config.js"></script>
   <script src="js/script.js"></script>
+  <script type="module" src="js/services.js"></script>
 </body>
 </html>

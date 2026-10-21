@@ -158,3 +158,50 @@ if (originDialog) {
     link.addEventListener("click", () => originDialog.close());
   });
 }
+
+const publicConfig = window.APP_CONFIG || {};
+const socialUrls = {
+  tiktok: publicConfig.socialTikTokUrl,
+  facebook: publicConfig.socialFacebookUrl,
+  instagram: publicConfig.socialInstagramUrl,
+  whatsapp: publicConfig.socialWhatsAppUrl
+};
+
+function isSafeExternalUrl(value) {
+  try {
+    const url = new URL(value);
+    return url.protocol === "https:" || url.protocol === "http:";
+  } catch {
+    return false;
+  }
+}
+
+document.querySelectorAll("[data-social-key]").forEach((link) => {
+  const url = socialUrls[link.dataset.socialKey];
+  if (isSafeExternalUrl(url)) {
+    link.href = url;
+    link.target = "_blank";
+    link.rel = "noopener noreferrer";
+    link.removeAttribute("aria-disabled");
+  } else {
+    link.setAttribute("aria-disabled", "true");
+    link.addEventListener("click", (event) => event.preventDefault());
+  }
+});
+
+const communityUrls = {
+  china: publicConfig.whatsappGroupChinaUrl,
+  chile: publicConfig.whatsappGroupChileUrl
+};
+document.querySelectorAll("[data-community-link]").forEach((link) => {
+  const url = communityUrls[link.dataset.communityLink];
+  if (isSafeExternalUrl(url)) {
+    link.href = url;
+    link.target = "_blank";
+    link.rel = "noopener noreferrer";
+    link.removeAttribute("aria-disabled");
+    link.closest(".community-card")?.querySelector(".community-pending")?.setAttribute("hidden", "");
+  } else {
+    link.addEventListener("click", (event) => event.preventDefault());
+  }
+});
